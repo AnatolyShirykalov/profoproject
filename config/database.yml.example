@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: profoproject_development
+  pool: 5
+  host: 'localhost'
+  username: profoproject
+  password: profoproject
+  template: template0
