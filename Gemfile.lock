@@ -125,6 +125,8 @@ GEM
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
       mail (~> 2.6)
+    enumerize (2.1.2)
+      activesupport (>= 3.2)
     erubi (1.6.1)
     execjs (2.7.0)
     factory_girl (4.8.0)
@@ -406,6 +408,7 @@ DEPENDENCIES
   devise
   devise-i18n
   email_spec
+  enumerize
   factory_girl_rails
   ffaker
   haml

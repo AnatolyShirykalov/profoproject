@@ -31,7 +31,8 @@ gem 'sentry-raven'
 gem 'rs_russian'
 
 gem 'uglifier'
-
+gem 'enumerize'
+gem 'ffaker'
 
 group :development do
   gem 'annotate'
@@ -53,7 +54,6 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
 
-  gem 'ffaker'
   gem 'factory_girl_rails'
 end
 

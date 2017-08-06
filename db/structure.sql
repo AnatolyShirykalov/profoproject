@@ -146,6 +146,107 @@ ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
 
 
 --
+-- Name: mark_type_stages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mark_type_stages (
+    id bigint NOT NULL,
+    stage_id bigint,
+    mark_type_id bigint,
+    enabled boolean DEFAULT false NOT NULL,
+    sort integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mark_type_stages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mark_type_stages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mark_type_stages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mark_type_stages_id_seq OWNED BY mark_type_stages.id;
+
+
+--
+-- Name: mark_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mark_types (
+    id bigint NOT NULL,
+    name character varying,
+    description character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mark_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mark_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mark_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mark_types_id_seq OWNED BY mark_types.id;
+
+
+--
+-- Name: marks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE marks (
+    id bigint NOT NULL,
+    mark_type_id bigint,
+    photo_id bigint,
+    user_id bigint,
+    mark integer NOT NULL,
+    content text NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: marks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE marks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: marks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE marks_id_seq OWNED BY marks.id;
+
+
+--
 -- Name: menus; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -266,6 +367,48 @@ CREATE SEQUENCE pages_id_seq
 --
 
 ALTER SEQUENCE pages_id_seq OWNED BY pages.id;
+
+
+--
+-- Name: photos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE photos (
+    id bigint NOT NULL,
+    name character varying,
+    slug character varying,
+    description character varying,
+    target character varying,
+    photo_file_name character varying,
+    photo_content_type character varying,
+    photo_file_size integer,
+    photo_updated_at timestamp without time zone,
+    stage_id bigint,
+    user_id bigint,
+    enabled boolean DEFAULT false NOT NULL,
+    sort integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: photos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE photos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: photos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE photos_id_seq OWNED BY photos.id;
 
 
 --
@@ -395,6 +538,110 @@ ALTER SEQUENCE simple_captcha_data_id_seq OWNED BY simple_captcha_data.id;
 
 
 --
+-- Name: stages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE stages (
+    id bigint NOT NULL,
+    name character varying,
+    content text,
+    enabled boolean DEFAULT false NOT NULL,
+    sort integer,
+    tournament_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: stages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE stages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE stages_id_seq OWNED BY stages.id;
+
+
+--
+-- Name: tournament_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE tournament_users (
+    id bigint NOT NULL,
+    tournament_id bigint,
+    user_id bigint,
+    role character varying,
+    enabled boolean DEFAULT false NOT NULL,
+    sort integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tournament_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tournament_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tournament_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tournament_users_id_seq OWNED BY tournament_users.id;
+
+
+--
+-- Name: tournaments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE tournaments (
+    id bigint NOT NULL,
+    name character varying,
+    slug character varying,
+    sort integer,
+    enabled boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tournaments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tournaments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tournaments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tournaments_id_seq OWNED BY tournaments.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -505,6 +752,27 @@ ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly
 
 
 --
+-- Name: mark_type_stages id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mark_type_stages ALTER COLUMN id SET DEFAULT nextval('mark_type_stages_id_seq'::regclass);
+
+
+--
+-- Name: mark_types id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mark_types ALTER COLUMN id SET DEFAULT nextval('mark_types_id_seq'::regclass);
+
+
+--
+-- Name: marks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY marks ALTER COLUMN id SET DEFAULT nextval('marks_id_seq'::regclass);
+
+
+--
 -- Name: menus id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -526,6 +794,13 @@ ALTER TABLE ONLY pages ALTER COLUMN id SET DEFAULT nextval('pages_id_seq'::regcl
 
 
 --
+-- Name: photos id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq'::regclass);
+
+
+--
 -- Name: rails_admin_settings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -544,6 +819,27 @@ ALTER TABLE ONLY seos ALTER COLUMN id SET DEFAULT nextval('seos_id_seq'::regclas
 --
 
 ALTER TABLE ONLY simple_captcha_data ALTER COLUMN id SET DEFAULT nextval('simple_captcha_data_id_seq'::regclass);
+
+
+--
+-- Name: stages id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY stages ALTER COLUMN id SET DEFAULT nextval('stages_id_seq'::regclass);
+
+
+--
+-- Name: tournament_users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tournament_users ALTER COLUMN id SET DEFAULT nextval('tournament_users_id_seq'::regclass);
+
+
+--
+-- Name: tournaments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tournaments ALTER COLUMN id SET DEFAULT nextval('tournaments_id_seq'::regclass);
 
 
 --
@@ -593,6 +889,30 @@ ALTER TABLE ONLY friendly_id_slugs
 
 
 --
+-- Name: mark_type_stages mark_type_stages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mark_type_stages
+    ADD CONSTRAINT mark_type_stages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mark_types mark_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mark_types
+    ADD CONSTRAINT mark_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: marks marks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY marks
+    ADD CONSTRAINT marks_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: menus menus_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -614,6 +934,14 @@ ALTER TABLE ONLY news
 
 ALTER TABLE ONLY pages
     ADD CONSTRAINT pages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: photos photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT photos_pkey PRIMARY KEY (id);
 
 
 --
@@ -646,6 +974,30 @@ ALTER TABLE ONLY seos
 
 ALTER TABLE ONLY simple_captcha_data
     ADD CONSTRAINT simple_captcha_data_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stages stages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY stages
+    ADD CONSTRAINT stages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tournament_users tournament_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tournament_users
+    ADD CONSTRAINT tournament_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tournaments tournaments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tournaments
+    ADD CONSTRAINT tournaments_pkey PRIMARY KEY (id);
 
 
 --
@@ -728,6 +1080,48 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USIN
 
 
 --
+-- Name: index_mark_type_stages_on_mark_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mark_type_stages_on_mark_type_id ON mark_type_stages USING btree (mark_type_id);
+
+
+--
+-- Name: index_mark_type_stages_on_stage_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mark_type_stages_on_stage_id ON mark_type_stages USING btree (stage_id);
+
+
+--
+-- Name: index_marks_on_mark_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_marks_on_mark_type_id ON marks USING btree (mark_type_id);
+
+
+--
+-- Name: index_marks_on_mark_type_id_and_photo_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_marks_on_mark_type_id_and_photo_id_and_user_id ON marks USING btree (mark_type_id, photo_id, user_id);
+
+
+--
+-- Name: index_marks_on_photo_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_marks_on_photo_id ON marks USING btree (photo_id);
+
+
+--
+-- Name: index_marks_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_marks_on_user_id ON marks USING btree (user_id);
+
+
+--
 -- Name: index_menus_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -763,6 +1157,20 @@ CREATE UNIQUE INDEX index_pages_on_slug ON pages USING btree (slug);
 
 
 --
+-- Name: index_photos_on_stage_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_photos_on_stage_id ON photos USING btree (stage_id);
+
+
+--
+-- Name: index_photos_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_photos_on_user_id ON photos USING btree (user_id);
+
+
+--
 -- Name: index_rails_admin_settings_on_key; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -781,6 +1189,27 @@ CREATE UNIQUE INDEX index_rails_admin_settings_on_ns_and_key ON rails_admin_sett
 --
 
 CREATE UNIQUE INDEX index_seos_on_seoable_id_and_seoable_type ON seos USING btree (seoable_id, seoable_type);
+
+
+--
+-- Name: index_stages_on_tournament_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stages_on_tournament_id ON stages USING btree (tournament_id);
+
+
+--
+-- Name: index_tournament_users_on_tournament_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tournament_users_on_tournament_id ON tournament_users USING btree (tournament_id);
+
+
+--
+-- Name: index_tournament_users_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tournament_users_on_user_id ON tournament_users USING btree (user_id);
 
 
 --
@@ -826,6 +1255,22 @@ CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (it
 
 
 --
+-- Name: marks fk_rails_1721cbe495; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY marks
+    ADD CONSTRAINT fk_rails_1721cbe495 FOREIGN KEY (mark_type_id) REFERENCES mark_types(id);
+
+
+--
+-- Name: mark_type_stages fk_rails_1f04b3106b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mark_type_stages
+    ADD CONSTRAINT fk_rails_1f04b3106b FOREIGN KEY (mark_type_id) REFERENCES mark_types(id);
+
+
+--
 -- Name: menus_pages fk_rails_2d8026bba5; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -834,11 +1279,75 @@ ALTER TABLE ONLY menus_pages
 
 
 --
+-- Name: tournament_users fk_rails_355a0e77b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tournament_users
+    ADD CONSTRAINT fk_rails_355a0e77b1 FOREIGN KEY (tournament_id) REFERENCES tournaments(id);
+
+
+--
+-- Name: mark_type_stages fk_rails_4413b95d2f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mark_type_stages
+    ADD CONSTRAINT fk_rails_4413b95d2f FOREIGN KEY (stage_id) REFERENCES stages(id);
+
+
+--
+-- Name: photos fk_rails_45e8f8ee1c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT fk_rails_45e8f8ee1c FOREIGN KEY (stage_id) REFERENCES stages(id);
+
+
+--
+-- Name: marks fk_rails_8a89591deb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY marks
+    ADD CONSTRAINT fk_rails_8a89591deb FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: photos fk_rails_c79d76afc0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT fk_rails_c79d76afc0 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: marks fk_rails_d000d667ce; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY marks
+    ADD CONSTRAINT fk_rails_d000d667ce FOREIGN KEY (photo_id) REFERENCES photos(id);
+
+
+--
 -- Name: menus_pages fk_rails_d62728888b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY menus_pages
     ADD CONSTRAINT fk_rails_d62728888b FOREIGN KEY (menu_id) REFERENCES menus(id) ON DELETE CASCADE;
+
+
+--
+-- Name: tournament_users fk_rails_f130ae0e38; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tournament_users
+    ADD CONSTRAINT fk_rails_f130ae0e38 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: stages fk_rails_f46790b406; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY stages
+    ADD CONSTRAINT fk_rails_f46790b406 FOREIGN KEY (tournament_id) REFERENCES tournaments(id);
 
 
 --
@@ -857,6 +1366,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170806112355'),
 ('20170806112356'),
 ('20170806112357'),
-('20170806112358');
+('20170806112358'),
+('20170806112360'),
+('20170806112361'),
+('20170806112362'),
+('20170806112363'),
+('20170806112364'),
+('20170806112365'),
+('20170806112366');
 
 
