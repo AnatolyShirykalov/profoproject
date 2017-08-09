@@ -24,7 +24,7 @@ class Stage < ApplicationRecord
     class_name: 'Photo', dependent: :destroy
   has_many :mark_type_stages, dependent: :destroy
   has_many :mark_types, through: :mark_type_stages
-  %i[mark_types photos backstage_photos].each do |key|
+  %i[mark_types].each do |key|
     accepts_nested_attributes_for key
   end
   has_many :marks, through: :photos
@@ -36,8 +36,8 @@ class Stage < ApplicationRecord
     field :enabled, :toggle
     field :sort
     field :mark_types
-    field :photos
-    field :backstage_photos
+    #field :photos
+    #field :backstage_photos
     list do
       exclude_fields :photos, :backstage_photos, :mark_types
     end

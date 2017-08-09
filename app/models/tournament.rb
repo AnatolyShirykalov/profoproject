@@ -31,9 +31,10 @@ class Tournament < ApplicationRecord
     field :enabled, :toggle
     field :sort
     field :stages
-    field :tournament_users
+    field :tournament_photographs
+    field :tournament_juries
     list do
-      exclude_fields :stages, :tournament_users
+      exclude_fields :stages, :tournament_phorographs, :tournament_juries
     end
   end
 end

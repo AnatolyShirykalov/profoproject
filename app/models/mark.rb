@@ -18,9 +18,9 @@ class Mark < ApplicationRecord
   belongs_to :user
   validates :mark_type_id, :photo_id, :user_id,
             :mark, :content, presence: true
-  accepts_nested_attributes_for :mark_type
-  accepts_nested_attributes_for :photo
-  accepts_nested_attributes_for :user
+  #accepts_nested_attributes_for :mark_type
+  #accepts_nested_attributes_for :photo
+  #accepts_nested_attributes_for :user
 
   rails_admin do
     field :mark_type

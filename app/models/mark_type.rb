@@ -14,8 +14,8 @@ class MarkType < ApplicationRecord
   has_many  :mark_type_stages, dependent: :destroy
   has_many :stages, through: :mark_type_stages
   has_many :marks
-  accepts_nested_attributes_for :stages
-  accepts_nested_attributes_for :marks
+  #accepts_nested_attributes_for :stages
+  #accepts_nested_attributes_for :marks
   rails_admin do
     field :name
     field :description, :ckeditor
