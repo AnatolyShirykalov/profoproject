@@ -16,6 +16,9 @@ class Tournament < ApplicationRecord
   include Sortable
   has_many :stages, dependent: :destroy
   accepts_nested_attributes_for :stages
+  has_one :partiable,
+    -> { where(enabled: true).where('deadline > ?', Time.now)},
+    class_name: 'Stage'
   %w[photographs juries].each do |roles|
     tr = :"tournament_#{roles}"
     has_many tr, -> {where(role: roles.singularize)},

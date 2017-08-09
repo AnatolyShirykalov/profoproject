@@ -43,9 +43,12 @@ class User < ApplicationRecord
 
   has_many :photos, dependent: :destroy
   has_many :marks, dependent: :destroy
-  has_many :tournament_users, dependent: :destroy
-  has_many :tournaments, through: :tournament_users
-
+  has_many :tournament_juries, -> {where role: 'jury'},
+    dependent: :destroy, class_name: 'TournamentUser'
+  has_many :tournament_photographs, -> {where role: 'photograph'},
+    dependent: :destroy, class_name: 'TournamentUser'
+  has_many :juriable, through: :tournament_juries, source: :tournament
+  has_many :partiable, through: :tournament_photographs, source: :tournament
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.role = 'social'

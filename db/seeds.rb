@@ -22,7 +22,7 @@ end
 
 
 t = Tournament.create! name: 'Сезон 9'
-stage = t.stages.create name: 'Внутренняя красота',
+stage = t.stages.create! name: 'Внутренняя красота',
   content: '''Понятия красоты меняются практически каждое десятилетие. Но фотографы уже давно доказали, что некрасивых людей нет - есть плохо выставленный свет и неудачные ракурсы.
 
 ТЕМА: ВНУТРЕННЯЯ КРАСОТА (ГАДКИЙ УТЁНОК)
@@ -36,8 +36,12 @@ stage = t.stages.create name: 'Внутренняя красота',
 Кадрирование - не ниже пояса. Движения модели в кадре не ограничиваются, также Вы можете использовать аксессуары, но не переборщите.
 Советуем вдохновиться работами Михаила Шестакова, который был нашим судьёй в седьмом сезоне: https://vk.com/mishest
 ''',
-  sort: 2,
+  sort: 2, deadline: Time.now - 1.day,
   enabled: :true
+
+stage2 = t.stages.create! name: 'Сними чего-нибудь',
+  content: 'Так по-мелочи', sort: 3, enabled: true, deadline: Time.now + 10.days
+
 
 def imgs_from dir
   Dir.glob(Rails.root.join('db', 'seed', 'photo', dir, '*')).map do |path|
@@ -62,6 +66,9 @@ mts = %w[Задумка Реализация].map do |name|
   stage.mark_types.create! name: name
 end
 
+stage2.mark_types = mts
+stage2.save!
+
 3.times do
   j = t.juries.create! name: FFaker::NameRU.name, password: common_pw,
     password_confirmation: common_pw, email: FFaker::Internet.email
@@ -72,3 +79,4 @@ end
     end
   end
 end
+

@@ -4,10 +4,12 @@
 #
 #  id            :integer          not null, primary key
 #  name          :string
+#  slug          :string
 #  content       :text
 #  enabled       :boolean          default(FALSE), not null
 #  sort          :integer
 #  tournament_id :integer
+#  deadline      :date
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

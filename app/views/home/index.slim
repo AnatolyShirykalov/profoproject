@@ -1,0 +1,13 @@
+.row
+  .col-sm-6
+    .row: .col-sm-12.text-center
+      h1 Фотографы
+    - @photographs.each do |photograph|
+      .card: .row: .col-sm-12.text-center
+        = photograph.email
+  .col-sm-6
+    .row: .col-sm-12.text-center
+      h1 Члены жюри
+    - @juries.each do |jury|
+      .card: .row: .col-sm-12.text-center
+        = jury.email

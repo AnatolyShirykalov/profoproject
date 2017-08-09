@@ -1,0 +1,19 @@
+- if @owe and !@photo.persisted?
+  = simple_form_for @photo, defaults: {\
+    input_html: {class: 'form-control'},\
+    wrapper_html: {class: 'form-group'}} do |f|
+      - %i[user_id stage_id target enabled].each do |key|
+        = f.hidden_field key
+      = f.input :name, required: true
+      = f.input :description, required: false
+      = f.input :photo, required: true, input_html: {class: 'file'}
+      = f.button :submit, class: 'btn btn-success'
+- else
+  - @stage.photos.each do |photo|
+    - if photo.persisted?
+      .card
+        .row: .col-sm-12 = image_tag photo.photo, class: 'img-fluid'
+        - if @stage.has_all_marks?
+          .row: .col-sm-12 = photo.user.name
+        - else
+          = render 'marks/under_photo', photo: photo

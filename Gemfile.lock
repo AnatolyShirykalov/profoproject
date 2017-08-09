@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/charliesome/better_errors.git
-  revision: a351d4fed2f00e8c1d6bf38316281bad30009526
-  specs:
-    better_errors (2.3.0)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
-
-GIT
   remote: git://github.com/crowdtask/rails_admin.git
   revision: ca07f9a287bbc465c75b4453069a6edaa94a42fd
   specs:
@@ -396,7 +387,6 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  better_errors!
   binding_of_caller
   cancancan
   capistrano

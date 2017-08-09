@@ -37,7 +37,6 @@ gem 'ffaker'
 group :development do
   gem 'annotate'
   gem 'binding_of_caller'
-  gem 'better_errors', github: 'charliesome/better_errors'
   gem 'pry-rails'
   gem 'listen'
 

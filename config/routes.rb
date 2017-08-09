@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  get 'partiables', to: 'partiable#index'
+  get 'partiable/:stage', to: 'partiable#show', as: :partiable
+
+  get 'stage/:slug', to: 'stages#show', as: :stage
+  resources :marks, only: [:create]
+  resources :photos, only: [:create]
   devise_for :users, controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks',
   }

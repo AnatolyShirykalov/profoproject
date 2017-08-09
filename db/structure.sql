@@ -544,10 +544,12 @@ ALTER SEQUENCE simple_captcha_data_id_seq OWNED BY simple_captcha_data.id;
 CREATE TABLE stages (
     id bigint NOT NULL,
     name character varying,
+    slug character varying,
     content text,
     enabled boolean DEFAULT false NOT NULL,
     sort integer,
     tournament_id bigint,
+    deadline date,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
