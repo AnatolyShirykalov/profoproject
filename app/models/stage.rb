@@ -32,6 +32,7 @@ class Stage < ApplicationRecord
   rails_admin do
     field :name
     field :tournament
+    field :deadline
     field :content, :ckeditor
     field :enabled, :toggle
     field :sort
