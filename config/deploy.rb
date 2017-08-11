@@ -1,4 +1,4 @@
-set :user, 'profproject'
+set :user, 'profoproject'
 set :application, 'profoproject'
 
 set :repo_url, 'git@github.com:AnatolyShirykalov/profoproject.git'
