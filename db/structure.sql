@@ -1,6 +1,5 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -188,7 +187,9 @@ CREATE TABLE mark_types (
     name character varying,
     description character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    min integer,
+    max integer
 );
 
 
@@ -733,133 +734,133 @@ ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 
 
 --
--- Name: ckeditor_assets id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ckeditor_assets ALTER COLUMN id SET DEFAULT nextval('ckeditor_assets_id_seq'::regclass);
 
 
 --
--- Name: contact_messages id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contact_messages ALTER COLUMN id SET DEFAULT nextval('contact_messages_id_seq'::regclass);
 
 
 --
--- Name: friendly_id_slugs id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly_id_slugs_id_seq'::regclass);
 
 
 --
--- Name: mark_type_stages id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mark_type_stages ALTER COLUMN id SET DEFAULT nextval('mark_type_stages_id_seq'::regclass);
 
 
 --
--- Name: mark_types id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mark_types ALTER COLUMN id SET DEFAULT nextval('mark_types_id_seq'::regclass);
 
 
 --
--- Name: marks id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY marks ALTER COLUMN id SET DEFAULT nextval('marks_id_seq'::regclass);
 
 
 --
--- Name: menus id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY menus ALTER COLUMN id SET DEFAULT nextval('menus_id_seq'::regclass);
 
 
 --
--- Name: news id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
 
 
 --
--- Name: pages id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pages ALTER COLUMN id SET DEFAULT nextval('pages_id_seq'::regclass);
 
 
 --
--- Name: photos id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq'::regclass);
 
 
 --
--- Name: rails_admin_settings id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY rails_admin_settings ALTER COLUMN id SET DEFAULT nextval('rails_admin_settings_id_seq'::regclass);
 
 
 --
--- Name: seos id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY seos ALTER COLUMN id SET DEFAULT nextval('seos_id_seq'::regclass);
 
 
 --
--- Name: simple_captcha_data id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY simple_captcha_data ALTER COLUMN id SET DEFAULT nextval('simple_captcha_data_id_seq'::regclass);
 
 
 --
--- Name: stages id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY stages ALTER COLUMN id SET DEFAULT nextval('stages_id_seq'::regclass);
 
 
 --
--- Name: tournament_users id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tournament_users ALTER COLUMN id SET DEFAULT nextval('tournament_users_id_seq'::regclass);
 
 
 --
--- Name: tournaments id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tournaments ALTER COLUMN id SET DEFAULT nextval('tournaments_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: versions id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
 
 
 --
--- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ar_internal_metadata
@@ -867,7 +868,7 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: ckeditor_assets ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ckeditor_assets
@@ -875,7 +876,7 @@ ALTER TABLE ONLY ckeditor_assets
 
 
 --
--- Name: contact_messages contact_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: contact_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contact_messages
@@ -883,7 +884,7 @@ ALTER TABLE ONLY contact_messages
 
 
 --
--- Name: friendly_id_slugs friendly_id_slugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: friendly_id_slugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY friendly_id_slugs
@@ -891,7 +892,7 @@ ALTER TABLE ONLY friendly_id_slugs
 
 
 --
--- Name: mark_type_stages mark_type_stages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mark_type_stages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mark_type_stages
@@ -899,7 +900,7 @@ ALTER TABLE ONLY mark_type_stages
 
 
 --
--- Name: mark_types mark_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mark_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mark_types
@@ -907,7 +908,7 @@ ALTER TABLE ONLY mark_types
 
 
 --
--- Name: marks marks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: marks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY marks
@@ -915,7 +916,7 @@ ALTER TABLE ONLY marks
 
 
 --
--- Name: menus menus_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: menus_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY menus
@@ -923,7 +924,7 @@ ALTER TABLE ONLY menus
 
 
 --
--- Name: news news_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY news
@@ -931,7 +932,7 @@ ALTER TABLE ONLY news
 
 
 --
--- Name: pages pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pages
@@ -939,7 +940,7 @@ ALTER TABLE ONLY pages
 
 
 --
--- Name: photos photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY photos
@@ -947,7 +948,7 @@ ALTER TABLE ONLY photos
 
 
 --
--- Name: rails_admin_settings rails_admin_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: rails_admin_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY rails_admin_settings
@@ -955,7 +956,7 @@ ALTER TABLE ONLY rails_admin_settings
 
 
 --
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY schema_migrations
@@ -963,7 +964,7 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: seos seos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: seos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY seos
@@ -971,7 +972,7 @@ ALTER TABLE ONLY seos
 
 
 --
--- Name: simple_captcha_data simple_captcha_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: simple_captcha_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY simple_captcha_data
@@ -979,7 +980,7 @@ ALTER TABLE ONLY simple_captcha_data
 
 
 --
--- Name: stages stages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: stages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY stages
@@ -987,7 +988,7 @@ ALTER TABLE ONLY stages
 
 
 --
--- Name: tournament_users tournament_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tournament_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tournament_users
@@ -995,7 +996,7 @@ ALTER TABLE ONLY tournament_users
 
 
 --
--- Name: tournaments tournaments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tournaments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tournaments
@@ -1003,7 +1004,7 @@ ALTER TABLE ONLY tournaments
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1011,7 +1012,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: versions versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY versions
@@ -1257,7 +1258,7 @@ CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (it
 
 
 --
--- Name: marks fk_rails_1721cbe495; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_1721cbe495; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY marks
@@ -1265,7 +1266,7 @@ ALTER TABLE ONLY marks
 
 
 --
--- Name: mark_type_stages fk_rails_1f04b3106b; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_1f04b3106b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mark_type_stages
@@ -1273,7 +1274,7 @@ ALTER TABLE ONLY mark_type_stages
 
 
 --
--- Name: menus_pages fk_rails_2d8026bba5; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_2d8026bba5; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY menus_pages
@@ -1281,7 +1282,7 @@ ALTER TABLE ONLY menus_pages
 
 
 --
--- Name: tournament_users fk_rails_355a0e77b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_355a0e77b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tournament_users
@@ -1289,7 +1290,7 @@ ALTER TABLE ONLY tournament_users
 
 
 --
--- Name: mark_type_stages fk_rails_4413b95d2f; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_4413b95d2f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mark_type_stages
@@ -1297,7 +1298,7 @@ ALTER TABLE ONLY mark_type_stages
 
 
 --
--- Name: photos fk_rails_45e8f8ee1c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_45e8f8ee1c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY photos
@@ -1305,7 +1306,7 @@ ALTER TABLE ONLY photos
 
 
 --
--- Name: marks fk_rails_8a89591deb; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_8a89591deb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY marks
@@ -1313,7 +1314,7 @@ ALTER TABLE ONLY marks
 
 
 --
--- Name: photos fk_rails_c79d76afc0; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_c79d76afc0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY photos
@@ -1321,7 +1322,7 @@ ALTER TABLE ONLY photos
 
 
 --
--- Name: marks fk_rails_d000d667ce; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_d000d667ce; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY marks
@@ -1329,7 +1330,7 @@ ALTER TABLE ONLY marks
 
 
 --
--- Name: menus_pages fk_rails_d62728888b; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_d62728888b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY menus_pages
@@ -1337,7 +1338,7 @@ ALTER TABLE ONLY menus_pages
 
 
 --
--- Name: tournament_users fk_rails_f130ae0e38; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_f130ae0e38; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tournament_users
@@ -1345,7 +1346,7 @@ ALTER TABLE ONLY tournament_users
 
 
 --
--- Name: stages fk_rails_f46790b406; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_f46790b406; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY stages
@@ -1375,6 +1376,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170806112363'),
 ('20170806112364'),
 ('20170806112365'),
-('20170806112366');
+('20170806112366'),
+('20170812152603');
 
 
