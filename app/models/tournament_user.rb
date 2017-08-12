@@ -19,6 +19,12 @@ class TournamentUser < ApplicationRecord
   belongs_to :tournament
   belongs_to :user
   enumerize :role, in: %w[photograph jury]
+
+  def enable!
+    self.enabled = true
+    save!
+  end
+
   rails_admin do
     field :tournament
     field :user

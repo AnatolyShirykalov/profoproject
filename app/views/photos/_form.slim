@@ -1,0 +1,7 @@
+= simple_form_for photo, sf_defaults do |f|
+  - %i[enabled target stage_id].each do |key|
+    = f.hidden_field key
+  = f.input :photo, required: true
+  = f.input :user_id, collection: @stage.photo_debtors, required: true
+  = f.input :name, required: true
+  = f.button :submit, class: 'btn btn-success'

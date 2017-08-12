@@ -26,6 +26,11 @@ class Tournament < ApplicationRecord
     accepts_nested_attributes_for tr
     has_many :"#{roles}", through: tr, class_name: 'User', source: 'user'
   end
+  has_many :tournament_enabled_photographs,
+    -> {where role: 'photograph', enabled: true},
+    class_name: 'TournamentUser', dependent: :destroy
+  has_many :enabled_photographs, through: :tournament_enabled_photographs,
+    source: 'user'
   rails_admin do
     field :name
     field :enabled, :toggle

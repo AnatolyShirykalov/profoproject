@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'stage/:slug', to: 'stages#show', as: :stage
   resources :marks, only: [:create]
-  resources :photos, only: [:create]
+  resources :photos, only: %i[new create]
   devise_for :users, controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks',
   }

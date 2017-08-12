@@ -1,0 +1,10 @@
+- if @stage
+  .row: .col-sm-12.text-center = "Открыт тур «#{@stage.name}»"
+  - unless @stage.all_photos_loaded?
+    .row: .col-sm-12.text-center = 'Загружены не все фото'
+  .row: .col-sm-12.text-center = "Дедлайн: #{@stage.deadline}"
+  - unless @stage.all_photos_loaded?
+    .row: .col-sm-12.text-center
+      = link_to 'Загрузить фото', new_photo_path(stage: @stage.slug)
+
+

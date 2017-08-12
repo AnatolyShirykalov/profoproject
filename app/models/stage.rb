@@ -29,6 +29,13 @@ class Stage < ApplicationRecord
   end
   has_many :marks, through: :photos
   friendly_id :name, use: :slugged
+
+
+  def photo_debtors
+    sql = '(SELECT COUNT(photos.*) FROM photos WHERE photos.user_id = users.id AND photos.target = ? AND stage_id = ?) < ?'
+    tournament.enabled_photographs.where(sql, 'stage', id, 1)
+  end
+
   rails_admin do
     field :name
     field :tournament
@@ -58,6 +65,10 @@ class Stage < ApplicationRecord
 
   def has_all_marks?
     tournament.juries.count * mark_types.count == marks.count
+  end
+
+  def all_photos_loaded?
+    tournament.enabled_photographs.count == photos.count
   end
 
 end
