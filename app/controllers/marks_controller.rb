@@ -1,6 +1,7 @@
 class MarksController < ApplicationController
   def create
-    current_user.marks.create! mark_params
+    mark = current_user.marks.create mark_params
+    flash[:errors] = mark.errors.messages.map{|k, v| "#{t("activerecord.attributes.mark.#{k}")} #{v.join(', ')}"}.join("\n")
     redirect_to request.env['HTTP_REFERER']
   end
 

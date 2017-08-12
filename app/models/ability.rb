@@ -2,13 +2,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    unless user.nil?
-      can :read, :all
-      can :manage, :all
-      cannot :destroy, Menu
-      cannot :update, Menu
-      admin_ui
-    end
+    return if user.nil?
+    admin_ui
+    can :read, Photo
+    can :read, Stage
+    can :manage, Mark, user: user
+    return if user.role != 'admin'
+    can :read, :all
+    can :manage,:all
+    cannot :manage, Mark
   end
 
   def admin_ui

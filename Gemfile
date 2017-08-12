@@ -16,7 +16,7 @@ gem 'webpack-rails'
 
 gem 'devise'
 gem 'devise-i18n'
-gem 'cancancan'
+gem 'cancancan', '~> 1.17.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'

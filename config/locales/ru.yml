@@ -1,4 +1,10 @@
 ru:
+  activerecord:
+    attributes:
+      mark:
+        mark: оценка
+        content: комментарий
+
   attributes:
     is_default: По умолчанию
   mongoid:
