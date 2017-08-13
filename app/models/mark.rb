@@ -23,11 +23,12 @@ class Mark < ApplicationRecord
   #accepts_nested_attributes_for :user
 
   rails_admin do
-    field :mark_type
-    field :user
-    field :photo
-    field :mark
-    field :content
+    edit do
+      field :mark_type
+      field :photo
+      field :mark
+      field :content, :ckeditor
+    end
   end
 
   def name

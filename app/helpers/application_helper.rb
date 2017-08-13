@@ -4,4 +4,8 @@ module ApplicationHelper
           wrapper_html: {class: 'col-sm'}
     }, html: {class: 'form-inline'} }
   end
+
+  def no_turbolinks
+    {no_turbolinks: true, turbolinks: false}
+  end
 end

@@ -1,17 +1,23 @@
 - if @stage.markable? current_user
-  - @stage.mark_types.each do |mark_type|
-    .card: .row
-      - mark =  photo.marks.find_or_initialize_by(user: current_user, mark_type: mark_type)
-      - if mark.persisted?
-        .col-sm-2 = mark.mark
-        .col-sm-10= raw mark.content
-      - else
-        .col-sm-12.text-center = simple_form_for mark, defaults: {\
-          input_html: {class: 'form-control'},\
-          wrapper_html: {class: 'col-sm'}},\
-          html: {class: 'form-inline'} do |f|
-            = f.input :mark, required: true, label: mark_type.name, input_html: {min: 1, max: 10, step: 1}
-            = f.input :content, required: true, label: 'Пояснение'
-            - %i[user_id mark_type_id photo_id].each do |key|
-              = f.hidden_field key
-            = f.button :submit, class: 'btn btn-success'
+  .row.under_photo: .col-sm-12.text-center
+    - @stage.mark_types.each do |mark_type|
+      .card: .row
+        - mark =  photo.marks.find_or_initialize_by(user: current_user, mark_type: mark_type)
+        - if mark.persisted?
+          .col-sm = mark_type.name
+          .col-sm = mark.mark
+          .col-sm = raw mark.content
+          .col-sm
+            =link_to 'Редактировать в админке', \
+            rails_admin.edit_path('mark', mark.id),\
+            data: no_turbolinks
+        - else
+          .col-sm-12.text-center = simple_form_for mark, defaults: {\
+            input_html: {class: 'form-control'},\
+            wrapper_html: {class: 'col-sm'}},\
+            html: {class: 'form-inline'} do |f|
+              = f.input :mark, required: true, label: mark_type.name, input_html: {min: 1, max: 10, step: 1}
+              = f.input :content, required: true, label: 'Пояснение'
+              - %i[user_id mark_type_id photo_id].each do |key|
+                = f.hidden_field key
+              = f.button :submit, class: 'btn btn-success'

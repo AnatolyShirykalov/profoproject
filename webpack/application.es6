@@ -6,6 +6,7 @@ import Errors from 'errors';
 import 'flash';
 import 'bootstrap';
 import Album from 'album';
+import Mark from 'mark';
 
 window.A = {}
 window.$ = $;
@@ -22,6 +23,8 @@ document.addEventListener("turbolinks:load", function() {
   switch ($('.page-data').data('controller')){
     case 'albums':
       new Album(); break;
+    case 'stages':
+      new Mark(); break;
   }
 })
 

@@ -2,6 +2,7 @@ header: .row
   .col-sm = render_navigation &navigation(:main)
   .col-sm
     - if user_signed_in?
-      = link_to 'Выйти', destroy_user_session_path, data: {method: 'delete'}
+      .row: .col-sm = link_to 'Выйти', destroy_user_session_path, data: {method: 'delete'}
+      .row: .col-sm = link_to 'Админка', '/admin', data: no_turbolinks
     - else
       = link_to 'Войти', new_user_session_path
