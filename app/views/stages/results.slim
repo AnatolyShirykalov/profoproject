@@ -22,7 +22,7 @@ table.table-bordered.table.table-hover.table-responsive
           .row: .col-sm-12: .card: .card-block
             .row: .col-sm-12.text-center: h5
               = "#{mark[:type].name} #{mark[:mark].mark}"
-            .row: .col-sm-12.text-center = mark[:mark].content
+            .row: .col-sm-12.text-center = raw mark[:mark].content
     .row: .col-sm-12.text-center: h3 Совет зрителей
     - result[:viewers].each do |mark_type_name, markmark|
       .row
