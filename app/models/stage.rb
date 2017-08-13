@@ -86,24 +86,54 @@ class Stage < ApplicationRecord
   def memorize
     return if @mem_jury_ids
     @mem_photographs = tournament.photographs.all.to_a
-    @mem_jury_ids    = tournament.juries.pluck(:id)
-    @mem_viewer_ids  = tournament.viewers.pluck(:id)
+    @mem_juries      = tournament.juries.all.to_a
+    @mem_jury_ids    = @mem_juries.map(&:id)
+    @mem_viewers     = tournament.viewers.all.to_a
+    @mem_viewer_ids  = @mem_viewers.map(&:id)
     @mem_photos      = photos.all.to_a
     @mem_mark_types  = mark_types.all.to_a
     @mem_marks       = Mark.where(user_id: @mem_jury_ids + @mem_viewer_ids,
-                                  photo_id: @mem_photos.map(&:id)).to_a
+                                  photo_id: @mem_photos.map(&:id)).
+                            preload(:user).to_a
   end
 
   def results
+    return @rts if @rts
     memorize
     puts "memorized!"
-    @mem_marks.group_by(&:photo_id).map(&results_by_photo).map do |ph|
+    @rts = @mem_marks.group_by(&:photo_id).map(&results_by_photo).map do |ph|
       jt = ph[:marks][:juries].map(&:mark).sum
       vt = results_total(ph[:marks][:viewers])
       ph.merge total: jt + vt
     end.map do |ph|
       ph.merge results_by_type(ph)
+    end.map do |ph|
+      ph.merge results_by_user(ph)
     end
+  end
+
+  def to_rows
+    results.sort{|r| -r[:total]}.map.with_index do |result, i|
+      a = [i + 1, result[:user].name, result[:total]] +
+      @mem_mark_types.map do |mark_type|
+        %i[juries viewers].map {|role| result[role][mark_type.name]}
+      end.inject(:+)
+      a
+    end
+  end
+
+  def to_rows!
+    @rts = nil
+    instance_variables.select{|v| v.to_s.match(/\A@mem/)}.each do |v|
+      instance_variable_set v, nil
+    end
+    to_rows
+  end
+
+  def row_header
+    %w[# Участник Всего] + mark_types.map do |mark_type|
+      ['жюри', 'совет зрителей'].map {|name| "#{mark_type.name} (#{name})"}
+    end.inject(:+)
   end
 
   private
@@ -111,6 +141,7 @@ class Stage < ApplicationRecord
     Proc.new do |pid, ms|
       {
         photo_id: pid,
+        photo: @mem_photos.find{|ph| ph.id == pid},
         user: @mem_photographs.find do |u|
           u.id == @mem_photos.find{|ph| ph.id == pid}.user_id
         end,
@@ -140,5 +171,19 @@ class Stage < ApplicationRecord
       end
     end
     by_type
+  end
+
+  def results_by_user ph
+    {by_user: ph[:marks][:juries].group_by(&:user_id).map do |uid, ms|
+      {
+        user: @mem_juries.find {|u| u.id == uid},
+        marks: ms.group_by(&:mark_type_id).map do |mt_id, ms_t|
+          {
+            type: @mem_mark_types.find{|mt| mt.id == mt_id},
+            mark: ms_t.first,
+          }
+        end,
+      }
+    end}
   end
 end

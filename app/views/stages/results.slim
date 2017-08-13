@@ -1,18 +1,31 @@
-table.table
-  thead: tr
-    th
-    th Участник
-    - @stage.mark_types.each do |mark_type|
-      - ['жюри', 'совет зрителей'].each do |name|
-        th = "#{mark_type.name} (#{name})"
-    th Всего
+.row: .col-sm-12
+  button.btn.btn-success#post-results data-slug="#{params[:slug]}" Выгрузить таблицу в Группу ВК
+table.table-bordered.table.table-hover.table-responsive
+  thead.thead-default: tr
+    - @stage.row_header.each do |th|
+      th = th
   tbody
-    - @results.each_with_index do |result, i|
-      tr
-        td = i + 1
-        td = result[:user].name
-        - @stage.mark_types.each do |mark_type|
-          - %i[juries viewers].each do |role|
-            td = result[role][mark_type.name]
-        td = result[:total]
+    - @stage.to_rows.each_with_index do |r, i|
+      tr class="#{i < 3 ? 'bg-success': ''}"
+        th scope='row' = r[0]
+        - r[1..-1].each do |td|
+          td = td
+- @stage.results.each do |result|
+  .card: .card-block
+    .row: .col-sm-12.text-center: h2 = "Фотограф: #{result[:user].name}"
+    .row: .col-sm-12.text-center
+      = image_tag result[:photo].photo, class: 'img-fluid'
+    - result[:by_user].each do |r|
+      .card: .card-block
+        .row: .col-sm-12.text-center: h3 = "Член жюри: #{r[:user].name}"
+        - r[:marks].each do |mark|
+          .row: .col-sm-12: .card: .card-block
+            .row: .col-sm-12.text-center: h5
+              = "#{mark[:type].name} #{mark[:mark].mark}"
+            .row: .col-sm-12.text-center = mark[:mark].content
+    .row: .col-sm-12.text-center: h3 Совет зрителей
+    - result[:viewers].each do |mark_type_name, markmark|
+      .row
+        .col-sm = mark_type_name
+        .col-sm = markmark
 

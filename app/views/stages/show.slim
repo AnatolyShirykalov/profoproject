@@ -12,10 +12,13 @@
   - if @stage.photos.count == 0
     .row: .col-sm-12.text-center Фото к этому туру ещё не загружены
   - else
+    .row: .col-sm-12.text-center Комментарии можно редактировать в админке в расширенном текстовом редакторе с возможностью встраивания изображений, видео, и прочих плюшек. Прямая ссылка на редактирование конкретного комментария появляется сразу после успешного создания комментария.
     - @stage.photos.to_a.shuffle.each do |photo|
       - if photo.persisted?
         .card
-          .row: .col-sm-12 = image_tag photo.photo, class: 'img-fluid'
+          .row: .col-sm-12
+            = link_to photo.photo.url, target: '_blank' do
+              = image_tag photo.photo, class: 'img-fluid'
           - if @stage.has_all_marks?
             .row: .col-sm-12 = photo.user.name
           - else

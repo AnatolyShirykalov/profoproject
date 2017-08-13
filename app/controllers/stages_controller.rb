@@ -1,10 +1,8 @@
 class StagesController < ApplicationController
+  include Vkontakt
+  before_action :init_vk_cli, only: :post
+
   def index
-    #if users_signed_in?
-    #  @partiable = current_user.partiable.preload(
-    #  @juriable = current_user.juriable
-    #end
-    #@lookable =
   end
 
   def show
@@ -19,6 +17,12 @@ class StagesController < ApplicationController
 
   def results
     @stage = Stage.find_by slug: params[:slug]
-    @results = @stage.results.sort_by{|r| -r[:total]}
   end
+
+  def post
+    @stage = Stage.find_by slug: params[:slug]
+    @vk.wall.post(owner_id: @gid, message: @stage.to_rows.map{|r| r.join("\t")}.join("\n"))
+    render json: {ok: true}
+  end
+
 end

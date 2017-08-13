@@ -6,6 +6,7 @@ import Errors from 'errors';
 import 'flash';
 import 'bootstrap';
 import Album from 'album';
+import Result from 'result';
 import Mark from 'mark';
 
 window.A = {}
@@ -24,7 +25,8 @@ document.addEventListener("turbolinks:load", function() {
     case 'albums':
       new Album(); break;
     case 'stages':
-      new Mark(); break;
+      new Mark();
+      new Result(); break;
   }
 })
 
