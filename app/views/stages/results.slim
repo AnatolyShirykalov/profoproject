@@ -1,0 +1,18 @@
+table.table
+  thead: tr
+    th
+    th Участник
+    - @stage.mark_types.each do |mark_type|
+      - ['жюри', 'совет зрителей'].each do |name|
+        th = "#{mark_type.name} (#{name})"
+    th Всего
+  tbody
+    - @results.each_with_index do |result, i|
+      tr
+        td = i + 1
+        td = result[:user].name
+        - @stage.mark_types.each do |mark_type|
+          - %i[juries viewers].each do |role|
+            td = result[role][mark_type.name]
+        td = result[:total]
+

@@ -11,16 +11,21 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.find_or_initialize_by photo_params
     src = params.require(:photo).permit(:src)[:src]
     if src
+      @photo = Photo.find_or_initialize_by photo_params
       @photo.photo = open(src)
       @photo.photo_file_name = URI.parse(src).path.split('/')[-1]
+      @photo.save!
+    else
+      @photo = Photo.create! photo_params
     end
-    @photo.save!
     if request.xhr?
       render json: {ok: (@photo and @photo.persisted? ? true : false)}
       return
+    end
+    if @photo
+      flash[:success] = "Фото успешно загружено"
     end
     redirect_to request.env['HTTP_REFERER']
   end

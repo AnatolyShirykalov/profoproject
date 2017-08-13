@@ -1,5 +1,11 @@
+- if @stages.count > 0
+  .row: .col-sm-12.text-center: h1 Закрытые этапы
+  - @stages.each do |stage|
+    .row: .col-sm-12.text-center
+      = link_to "Выгрузить результаты этапа «#{stage.name}» (дэдлайн #{stage.deadline})", stage_results_path(slug: stage.slug)
+
 - if @stage
-  .row: .col-sm-12.text-center = "Открыт тур «#{@stage.name}»"
+  .row: .col-sm-12.text-center: h1 = "Открыт этап «#{@stage.name}»"
   - unless @stage.all_photos_loaded?
     .row: .col-sm-12.text-center = 'Загружены не все фото'
   .row: .col-sm-12.text-center = "Дедлайн: #{@stage.deadline}"

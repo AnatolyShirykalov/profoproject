@@ -16,4 +16,9 @@ class StagesController < ApplicationController
       target: 'stage',
     })
   end
+
+  def results
+    @stage = Stage.find_by slug: params[:slug]
+    @results = @stage.results.sort_by{|r| -r[:total]}
+  end
 end

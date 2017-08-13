@@ -83,8 +83,8 @@ end
 stage2.mark_types = mts
 stage2.save!
 
-3.times do
-  j = t.juries.create! name: FFaker::NameRU.name, password: common_pw,
+pr = Proc.new do |roles|
+  j = t.send(roles).create! name: FFaker::NameRU.name, password: common_pw,
     password_confirmation: common_pw, email: FFaker::Internet.email
   stage.photos.each do |photo|
     mts.each do |mt|
@@ -93,6 +93,10 @@ stage2.save!
     end
   end
 end
+
+3.times{ pr.call('juries') }
+2.times{ pr.call('viewers') }
+
 
 
 TournamentUser.find_each(&:enable!)

@@ -14,23 +14,35 @@
 class Tournament < ApplicationRecord
   include Enableable
   include Sortable
-  has_many :stages, dependent: :destroy
+
+  has_many                      :stages, dependent: :destroy
   accepts_nested_attributes_for :stages
+
   has_one :partiable,
-    -> { where(enabled: true).where('deadline > ?', Time.now)},
-    class_name: 'Stage'
-  %w[photographs juries].each do |roles|
-    tr = :"tournament_#{roles}"
-    has_many tr, -> {where(role: roles.singularize)},
-      dependent: :destroy, class_name: 'TournamentUser'
+          -> { where(enabled: true).where('deadline > ?', Time.now)},
+          class_name: 'Stage'
+
+  %w[photographs juries viewers].each do |roles|
+    tr =                          :"tournament_#{roles}"
+    has_many                      tr, -> {where(role: roles.singularize)},
+                                  dependent: :destroy,
+                                  class_name: 'TournamentUser'
+
     accepts_nested_attributes_for tr
-    has_many :"#{roles}", through: tr, class_name: 'User', source: 'user'
+
+    has_many                      roles.to_sym,
+                                  through: tr,
+                                  class_name: 'User',
+                                  source: 'user'
   end
+
   has_many :tournament_enabled_photographs,
-    -> {where role: 'photograph', enabled: true},
-    class_name: 'TournamentUser', dependent: :destroy
+           -> {where role: 'photograph', enabled: true},
+           class_name: 'TournamentUser', dependent: :destroy
+
   has_many :enabled_photographs, through: :tournament_enabled_photographs,
-    source: 'user'
+           source: 'user'
+
   rails_admin do
     field :name
     field :enabled, :toggle

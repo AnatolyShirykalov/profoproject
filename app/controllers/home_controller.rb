@@ -3,14 +3,16 @@ class HomeController < ApplicationController
   def index
     @stage = Stage.current
     if current_user.role != 'admin'
-      unless @stage.tournament.juries.find_by(id: current_user.id)
-        flash[:errors] = "Вы не являетесь членом жюри данного этапа"
+      unless @stage.markable? current_user
+        flash[:errors] = 'Вы не являетесь членом жюри данного этапа'
         redirect_to '/about'
         return
       end
       redirect_to stage_path(@stage)
     end
-    @photographs = Tournament.first.photographs
-    @juries = Tournament.first.juries
+    @stages      = Stage.closed
+    @photographs = @stage.tournament.photographs
+    @juries      = @stage.tournament.juries
+    @viewers     = @stage.tournament.viewers
   end
 end

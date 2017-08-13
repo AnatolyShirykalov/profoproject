@@ -4,15 +4,15 @@
 
 
 .row
-  .col-sm-6
-    .row: .col-sm-12.text-center
-      h1 Фотографы
+  .col-sm-4
+    .row: .col-sm-12.text-center: h1 Фотографы
     - @photographs.each do |photograph|
-      .card: .row: .col-sm-12.text-center
-        = photograph.email
-  .col-sm-6
-    .row: .col-sm-12.text-center
-      h1 Члены жюри
+      .card: .row: .col-sm-12.text-center = photograph.email
+  .col-sm-4
+    .row: .col-sm-12.text-center: h1 Члены жюри
     - @juries.each do |jury|
-      .card: .row: .col-sm-12.text-center
-        = jury.email
+      .card: .row: .col-sm-12.text-center = jury.email
+  .col-sm-4
+    .row: .col-sm-12.text-center: h1 Совет зрителей
+    - @viewers.each do |viewer|
+      .card: .row: .col-sm-12.text-center = viewer.email

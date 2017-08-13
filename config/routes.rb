@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'partiable/:stage', to: 'partiable#show', as: :partiable
 
   get 'stage/:slug', to: 'stages#show', as: :stage
+  get 'stage/results/:slug', to: 'stages#results', as: :stage_results
   resources :marks, only: [:create]
   resources :photos, only: %i[new create]
   devise_for :users, controllers: {

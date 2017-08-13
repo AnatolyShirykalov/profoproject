@@ -18,7 +18,7 @@ class TournamentUser < ApplicationRecord
   include Sortable
   belongs_to :tournament
   belongs_to :user
-  enumerize :role, in: %w[photograph jury]
+  enumerize :role, in: %w[photograph jury viewer]
 
   def enable!
     self.enabled = true

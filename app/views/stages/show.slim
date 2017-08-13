@@ -8,11 +8,11 @@
       = f.input :description, required: false
       = f.input :photo, required: true, input_html: {class: 'file'}
       = f.button :submit, class: 'btn btn-success'
-- else
+- elsif @stage.markable? current_user
   - if @stage.photos.count == 0
     .row: .col-sm-12.text-center Фото к этому туру ещё не загружены
   - else
-    - @stage.photos.each do |photo|
+    - @stage.photos.to_a.shuffle.each do |photo|
       - if photo.persisted?
         .card
           .row: .col-sm-12 = image_tag photo.photo, class: 'img-fluid'
