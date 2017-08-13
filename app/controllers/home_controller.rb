@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
   def index
-    @stage = Stage.enabled.order(:deadline).last
+    @stage = Stage.current
     if current_user.role != 'admin'
       unless @stage.tournament.juries.find_by(id: current_user.id)
         flash[:errors] = "Вы не являетесь членом жюри данного этапа"

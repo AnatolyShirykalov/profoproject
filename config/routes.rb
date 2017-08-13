@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :albums, only: %i[index show]
+
   get 'partiables', to: 'partiable#index'
   get 'partiable/:stage', to: 'partiable#show', as: :partiable
 

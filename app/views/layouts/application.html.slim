@@ -21,7 +21,7 @@ html lang="ru"
       span Включите его, чтобы зайти на сайт
       a class="btn-transparent" target="_blank" href="https://yandex.ru/support/common/browsers-settings/browsers-java-js-settings.xml" Включить JavaScript
 
-    .container
+    .container.page-data data-controller="#{params[:controller]}"
       = render 'shared/messages'
       = yield
     #footer

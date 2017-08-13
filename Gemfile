@@ -20,6 +20,7 @@ gem 'cancancan', '~> 1.17.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'vkontakte_api'
 
 
 gem 'cloner'

@@ -1,0 +1,15 @@
+.row: .col-sm-12.text-center: h1 = "Этап «#{@stage.name}»"
+- @photos.each do |photo|
+  .card: .card-block
+    .row: .col-sm-12.text-center
+      - url = photo.sizes.max_by(&:width).src
+      = link_to url, target: '_blank' do
+        = image_tag url, class: 'img-fluid'
+    /- user = @users.find{|u| u.uid == photo.user_id.to_s}
+    /- if user
+      /.row: .col-sm-12.text-center
+        /= user.name
+    .row: .col-sm-12.text-center
+      button.btn.btn-success.add-photo-button data-src="#{url}" data-stage="#{@stage.slug}"
+        |Добавить это фото
+

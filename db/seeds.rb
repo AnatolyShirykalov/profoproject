@@ -96,3 +96,4 @@ end
 
 
 TournamentUser.find_each(&:enable!)
+Settings.ns('vk').group_id = Rails.application.secrets.protoproject_group_id

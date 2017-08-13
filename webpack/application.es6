@@ -5,8 +5,10 @@ Rails.start();
 import Errors from 'errors';
 import 'flash';
 import 'bootstrap';
+import Album from 'album';
 
 window.A = {}
+window.$ = $;
 A.errors = new Errors()
 
 $(function() {
@@ -16,6 +18,10 @@ $(function() {
 import Turbolinks from "turbolinks";
 Turbolinks.start()
 
-//document.addEventListener("turbolinks:load", function() {
-//})
+document.addEventListener("turbolinks:load", function() {
+  switch ($('.page-data').data('controller')){
+    case 'albums':
+      new Album(); break;
+  }
+})
 

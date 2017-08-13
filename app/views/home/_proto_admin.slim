@@ -6,5 +6,6 @@
   - unless @stage.all_photos_loaded?
     .row: .col-sm-12.text-center
       = link_to 'Загрузить фото', new_photo_path(stage: @stage.slug)
-
+    .row: .col-sm-12.text-center
+      = link_to 'Загрузить альбом VK', albums_path
 

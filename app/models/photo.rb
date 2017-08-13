@@ -20,6 +20,7 @@
 #
 
 class Photo < ApplicationRecord
+  attr_accessor :src
   extend Enumerize
   include Enableable
   include Sortable

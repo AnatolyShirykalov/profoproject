@@ -1,0 +1,9 @@
+.row: .col-sm-12.text-center: h1 Список альбомов группы
+.row: .col-sm-12.text-center
+  - @albums.each do |album|
+    .card: .card-block
+      = link_to album_path(album[:aid]) do
+        .row: .col-sm-12.text-center
+          = image_tag album[:thumb_src], class: 'img-fluid'
+        .row: .col-sm-12.text-center = album.title
+

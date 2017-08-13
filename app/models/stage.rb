@@ -52,7 +52,7 @@ class Stage < ApplicationRecord
   end
 
   def self.current
-    enabled.order(:created_at).last
+    enabled.order(:deadline).last
   end
 
   def current?
