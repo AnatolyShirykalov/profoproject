@@ -15,10 +15,15 @@ ru:
         mark: оценка
         content: комментарий
       photo:
-        photo: фотографии
-        Marks: оценки
+        photo: фотография
+        marks: оценки
       tournament_user:
         role: роль
+      user:
+        role: роль
+      stage:
+        tournament: сезон
+        dedline: крайний срок
   attributes:
     is_default: По умолчанию
   mongoid:
