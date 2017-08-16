@@ -1,10 +1,24 @@
 ru:
   activerecord:
+    models:
+      photo:
+        one: фоторгафия
+        few: фотографии
+        many: фотографии
+        other: фотографии
+      stage: этапы конкурса
+      tournament: конкурс
+      tournament_user: участники конкурса
+      mark_type: виды оценок
     attributes:
       mark:
         mark: оценка
         content: комментарий
-
+      photo:
+        photo: фотографии
+        Marks: оценки
+      tournament_user:
+        role: роль
   attributes:
     is_default: По умолчанию
   mongoid:
