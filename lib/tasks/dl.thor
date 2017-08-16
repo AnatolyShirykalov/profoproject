@@ -24,5 +24,7 @@ class Dl < Cloner::Base
     load_env
     clone_db
     rsync_public("system")
+    rsync_public("uploads")
+    rsync_public("assets")
   end
 end
