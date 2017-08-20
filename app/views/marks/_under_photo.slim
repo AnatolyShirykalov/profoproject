@@ -19,7 +19,7 @@
             wrapper_html: {class: 'col-sm'}},\
             html: {class: 'form-inline'} do |f|
               - if mark_type.name != 'Комментарий'
-                = f.input :mark, required: true, label: mark_type.name, input_html: {min: 1, max: 10, step: 1}
+                = f.input :mark, required: true, label: mark_type.name, input_html: {min: 1, max: 5, step: 1}
               - else
                 = f.input :content, required: true, label: 'Комментарий'
                 = f.input :image1, label: 'Картинка 1'

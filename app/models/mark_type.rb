@@ -21,7 +21,7 @@ class MarkType < ApplicationRecord
   rails_admin do
     navigation_label 'Оценки'
     field :name
-    field :description, :ckeditor
+    #field :description, :ckeditor
     field :stages
   end
 end

@@ -14,7 +14,8 @@ ru:
     attributes:
       tournament:
         photographs: фотографы
-        juries: члены жюри
+        juries: жюри
+        viewers: совет зрителей
       mark:
         mark: оценка
         content: комментарий
