@@ -38,7 +38,7 @@ class User < ApplicationRecord
   # :confirmable,  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,  :lockable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook vkontakte]
+         :omniauthable, omniauth_providers: %i[vkontakte]
 
   has_attached_file :image
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
