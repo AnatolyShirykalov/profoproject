@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       redirect_to stage_path(@stage)
     end
     @stages      = Stage.closed
-    @photographs = @stage.tournament.photographs
+    @photographs = @stage.tournament.enabled_photographs
     @juries      = @stage.tournament.juries
     @viewers     = @stage.tournament.viewers
   end
