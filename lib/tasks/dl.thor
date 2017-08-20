@@ -6,16 +6,16 @@ class Dl < Cloner::Base
       File.expand_path("../../../config/environment", __FILE__)
     end
     def ssh_host
-      '52.41.205.115'
+      'shirykalov.tk'
     end
     def ssh_user
-      'profproject'
+      'profoproject'
     end
     def remote_dump_path
-      '/home/profproject/tmp_dump'
+      '/home/profoproject/tmp_dump'
     end
     def remote_app_path
-      '/home/profproject/app/current'
+      '/home/profoproject/app/current'
     end
   end
 
@@ -24,7 +24,5 @@ class Dl < Cloner::Base
     load_env
     clone_db
     rsync_public("system")
-    rsync_public("uploads")
-    rsync_public("assets")
   end
 end
