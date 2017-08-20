@@ -21,6 +21,7 @@
               - if mark_type.name != 'Комментарий'
                 = f.input :mark, required: true, label: mark_type.name, input_html: {min: 1, max: 5, step: 1}
               - else
+                - next if @stage.tournament.viewers.pluck(:id).include? current_user.id
                 = f.input :content, required: true, label: 'Комментарий'
                 = f.input :image1, label: 'Картинка 1'
                 = f.input :image2, label: 'Картинка 2'
