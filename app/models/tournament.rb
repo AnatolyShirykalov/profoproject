@@ -48,5 +48,6 @@ class Tournament < ApplicationRecord
     field :name
     field :photographs
     field :juries
+    field :viewers
   end
 end
