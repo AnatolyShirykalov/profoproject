@@ -30,7 +30,7 @@ User.create!(email: 'admin@profoproject.ru', password: admin_pw, password_confir
 common_pw = 'qwerty123'
 usrs = (1..17).map do
   User.create! email: FFaker::Internet.email, password: common_pw,
-    password_confirmation: common_pw, role: 'photograph',
+    password_confirmation: common_pw, role: 'common',
     name: FFaker::NameRU.name
 end
 

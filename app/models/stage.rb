@@ -33,7 +33,7 @@ class Stage < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  %i[mark_types].each {|key| accepts_nested_attributes_for key}
+  #%i[mark_types].each {|key| accepts_nested_attributes_for key}
 
 
   def photo_debtors
@@ -44,10 +44,11 @@ class Stage < ApplicationRecord
   end
 
   rails_admin do
+    navigation_label 'Рубежи'
     field :name
     field :tournament
     field :deadline
-    field :content, :ckeditor
+    #field :content, :ckeditor
     field :enabled, :toggle
     field :sort
     field :mark_types

@@ -6,24 +6,54 @@ ru:
         few: фотографии
         many: фотографии
         other: фотографии
-      stage: этапы конкурса
+      stage: тур
       tournament: конкурс
       tournament_user: участники конкурса
-      mark_type: виды оценок
+      mark_type: система оценок
+      mark: оценка
     attributes:
+      tournament:
+        photographs: фотографы
+        juries: члены жюри
       mark:
         mark: оценка
         content: комментарий
+        mark_type: тип оценки
+        image1: картинка 1
+        image2: картинка 2
       photo:
         photo: фотография
+        stage: тур
+        target: цель
         marks: оценки
       tournament_user:
         role: роль
+        tournament: сезон
       user:
         role: роль
+        provider: соц сеть
+        uid: id в соц сети
+        name: имя
       stage:
         tournament: сезон
-        dedline: крайний срок
+        deadline: дэдлайн (время переключения на следующий этап)
+        enabled: запустить сразу
+        sort: порядковый номер в сезоне
+        mark_types: система оценок
+  enumerize:
+    user:
+      role:
+        admin: администратор
+        common: плебей
+    tournament_user:
+      role:
+        photograph: фотограф
+        jury: член жюри
+        viewer: член совета зрителей
+    photo:
+      target:
+        stage: на конкурс
+        backstage: Backstage
   attributes:
     is_default: По умолчанию
   mongoid:

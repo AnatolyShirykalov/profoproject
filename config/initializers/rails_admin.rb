@@ -10,9 +10,9 @@ RailsAdmin.config do |config|
   #config.authenticate_with do
     #warden.authenticate! scope: :user
   #end
-  
+
   config.current_user_method(&:current_user)
-  
+
   ## == Cancan ==
   config.authorize_with :cancan
 
@@ -26,7 +26,7 @@ RailsAdmin.config do |config|
     # collection actions
     index
     new
-    export
+    #export
     bulk_delete
 
     # member actions
@@ -34,21 +34,21 @@ RailsAdmin.config do |config|
     edit
     delete
 
-    history_index
-    history_show
+    #history_index
+    #history_show
 
     nested_set do
       visible do
         ['Page', 'Slide', 'Partner'].include? bindings[:abstract_model].model_name
       end
     end
-    
+
     custom_show_in_app do
       visible do
         ['Page', 'News'].include? bindings[:abstract_model].model_name
       end
     end
-    
+
     toggle
     toggle_menu do
       visible do
@@ -57,11 +57,12 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.main_app_name = ['Profoproject', 'Админка']
+  config.main_app_name = ['Универсальный фотограф', 'Админка']
 
   config.excluded_models = [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
       'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'ContactMessage', 'News', 'Menu', 'Page',
   ]
 end
 

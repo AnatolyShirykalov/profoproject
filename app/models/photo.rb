@@ -49,10 +49,17 @@ class Photo < ApplicationRecord
   end
 
   rails_admin do
+    navigation_label 'Фотографии'
     field :name
     field :photo
     field :stage
     field :target
     field :marks
+    edit do
+      exclude_fields :marks
+    end
+    create do
+      exclude_fields :marks
+    end
   end
 end

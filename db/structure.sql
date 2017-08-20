@@ -222,6 +222,14 @@ CREATE TABLE marks (
     user_id bigint,
     mark integer NOT NULL,
     content text NOT NULL,
+    image1_file_name character varying,
+    image1_content_type character varying,
+    image1_file_size integer,
+    image1_updated_at timestamp without time zone,
+    image2_file_name character varying,
+    image2_content_type character varying,
+    image2_file_size integer,
+    image2_updated_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

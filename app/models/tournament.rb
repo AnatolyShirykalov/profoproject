@@ -28,7 +28,7 @@ class Tournament < ApplicationRecord
                                   dependent: :destroy,
                                   class_name: 'TournamentUser'
 
-    accepts_nested_attributes_for tr
+    #accepts_nested_attributes_for tr
 
     has_many                      roles.to_sym,
                                   through: tr,
@@ -44,14 +44,9 @@ class Tournament < ApplicationRecord
            source: 'user'
 
   rails_admin do
+    navigation_label 'Рубежи'
     field :name
-    field :enabled, :toggle
-    field :sort
-    field :stages
-    field :tournament_photographs
-    field :tournament_juries
-    list do
-      exclude_fields :stages, :tournament_phorographs, :tournament_juries
-    end
+    field :photographs
+    field :juries
   end
 end

@@ -22,12 +22,21 @@ class Mark < ApplicationRecord
   #accepts_nested_attributes_for :photo
   #accepts_nested_attributes_for :user
 
+  has_attached_file                 :image1
+  validates_attachment_content_type :image1, content_type: /\Aimage\/.*\Z/
+
+  has_attached_file                 :image2
+  validates_attachment_content_type :image2, content_type: /\Aimage\/.*\Z/
+
   rails_admin do
+    navigation_label 'Оценки'
     edit do
       field :mark_type
       field :photo
       field :mark
-      field :content, :ckeditor
+      field :content
+      field :image1
+      field :image2
     end
   end
 

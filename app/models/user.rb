@@ -33,6 +33,7 @@
 #
 
 class User < ApplicationRecord
+  extend Enumerize
   # Include default devise modules. Others available are:
   # :confirmable,  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,  :lockable,
@@ -55,6 +56,8 @@ class User < ApplicationRecord
   has_many :partiable, through: :tournament_photographs, source: :tournament
   has_many :viewable,  through: :tournament_viewers,     source: :tournament
 
+  enumerize :role, in: %w[admin common]
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.role     = 'social'
@@ -65,4 +68,15 @@ class User < ApplicationRecord
     end
   end
 
+  def password_match?
+  end
+
+  rails_admin do
+    navigation_label 'Люди'
+    field :email
+    field :name
+    field :role
+    field :provider
+    field :uid
+  end
 end

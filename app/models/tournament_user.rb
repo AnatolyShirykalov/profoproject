@@ -26,10 +26,10 @@ class TournamentUser < ApplicationRecord
   end
 
   rails_admin do
+    navigation_label 'Люди'
     field :tournament
     field :user
     field :role
     field :enabled, :toggle
-    field :sort
   end
 end

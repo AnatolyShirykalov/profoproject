@@ -14,7 +14,7 @@ table.table-bordered.table.table-hover.table-responsive
   .card: .card-block
     .row: .col-sm-12.text-center: h2 = "Фотограф: #{result[:user].name}"
     .row: .col-sm-12.text-center
-      = image_tag result[:photo].photo, class: 'img-fluid'
+      = image_tag result[:photo].photo, class: 'img-fluid aesh-height'
     - result[:by_user].each do |r|
       .card: .card-block
         .row: .col-sm-12.text-center: h3 = "Член жюри: #{r[:user].name}"
@@ -23,6 +23,10 @@ table.table-bordered.table.table-hover.table-responsive
             .row: .col-sm-12.text-center: h5
               = "#{mark[:type].name} #{mark[:mark].mark}"
             .row: .col-sm-12.text-center = raw mark[:mark].content
+            - (1..2).each do |i|
+              - img = mark[:mark].send("image#{i}")
+              - unless img.path.nil?
+                .row: .col-sm-12.text-center = image_tag img.url, class: 'img-fluid aesh-height'
     .row: .col-sm-12.text-center: h3 Совет зрителей
     - result[:viewers].each do |mark_type_name, markmark|
       .row

@@ -19,6 +19,7 @@ class MarkType < ApplicationRecord
   #accepts_nested_attributes_for :stages
   #accepts_nested_attributes_for :marks
   rails_admin do
+    navigation_label 'Оценки'
     field :name
     field :description, :ckeditor
     field :stages
