@@ -4,8 +4,8 @@ class CreateMarks < ActiveRecord::Migration[5.1]
       t.references :mark_type, foreign_key: true
       t.references :photo, foreign_key: true
       t.references :user, foreign_key: true
-      t.integer :mark, null: false
-      t.text :content, null: false
+      t.integer :mark, null: false, default: 0
+      t.text :content, null: false, default: ''
       t.attachment :image1
       t.attachment :image2
 

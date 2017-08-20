@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'stage/:slug', to: 'stages#show', as: :stage
   get 'stage/results/:slug', to: 'stages#results', as: :stage_results
   post 'stage/post', to: 'stages#post', as: :stage_post
+  post 'stage/post_comments', to: 'stages#post_comments', as: :stage_post_comments
   resources :marks, only: [:create]
   resources :photos, only: %i[new create]
   devise_for :users, controllers: {

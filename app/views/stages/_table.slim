@@ -1,0 +1,10 @@
+table.table-bordered.table.table-hover.table-responsive
+  thead.thead-default: tr
+    - @stage.row_header.slice(0, 3).each do |th|
+      th = th
+  tbody
+    - @stage.to_rows.each_with_index do |r, i|
+      tr class="#{i < 3 ? 'bg-success': ''}"
+        th scope='row' = r[0]
+        - r[1..2].each do |td|
+          td = td

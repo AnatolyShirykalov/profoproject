@@ -1,15 +1,10 @@
 .row: .col-sm-12
   button.btn.btn-success#post-results data-slug="#{params[:slug]}" Выгрузить таблицу в Группу ВК
-table.table-bordered.table.table-hover.table-responsive
-  thead.thead-default: tr
-    - @stage.row_header.each do |th|
-      th = th
-  tbody
-    - @stage.to_rows.each_with_index do |r, i|
-      tr class="#{i < 3 ? 'bg-success': ''}"
-        th scope='row' = r[0]
-        - r[1..-1].each do |td|
-          td = td
+.row: .col-sm-12
+  label for="album_id" Номер альбома
+  input#album_id type="number" name="album_id"
+  button.btn.btn-success#post-marks data-slug="#{params[:slug]}" Выгрузить комментарии
+= render 'table'
 - @stage.results.each do |result|
   .card: .card-block
     .row: .col-sm-12.text-center: h2 = "Фотограф: #{result[:user].name}"
@@ -21,7 +16,7 @@ table.table-bordered.table.table-hover.table-responsive
         - r[:marks].each do |mark|
           .row: .col-sm-12: .card: .card-block
             .row: .col-sm-12.text-center: h5
-              = "#{mark[:type].name} #{mark[:mark].mark}"
+              = "#{mark[:type].name} #{mark[:type].name == 'Комментарий' ? '' : mark[:mark].mark}"
             .row: .col-sm-12.text-center = raw mark[:mark].content
             - (1..2).each do |i|
               - img = mark[:mark].send("image#{i}")
@@ -29,7 +24,8 @@ table.table-bordered.table.table-hover.table-responsive
                 .row: .col-sm-12.text-center = image_tag img.url, class: 'img-fluid aesh-height'
     .row: .col-sm-12.text-center: h3 Совет зрителей
     - result[:viewers].each do |mark_type_name, markmark|
-      .row
-        .col-sm = mark_type_name
-        .col-sm = markmark
+      - if mark_type_name != 'Комментарий'
+        .row
+          .col-sm = mark_type_name
+          .col-sm = markmark
 

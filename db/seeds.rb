@@ -76,7 +76,7 @@ imgs_from('puddles').each do |img|
     name: FFaker::LoremRU.word, user: usrs[0]
 end
 
-mts = %w[Задумка Реализация].map do |name|
+mts = %w[Задумка Реализация Комментарий].map do |name|
   stage.mark_types.create! name: name
 end
 
@@ -88,8 +88,11 @@ pr = Proc.new do |roles|
     password_confirmation: common_pw, email: FFaker::Internet.email
   stage.photos.each do |photo|
     mts.each do |mt|
-      mt.marks.create! user: j, photo: photo, mark: rand(10) + 1,
-        content: FFaker::LoremRU.paragraph
+      if mt.name != 'Комментарий'
+        mt.marks.create! user: j, photo: photo, mark: rand(10) + 1
+        next
+      end
+      mt.marks.create! user: j, photo: photo, content: FFaker::LoremRU.paragraph
     end
   end
 end

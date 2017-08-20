@@ -16,8 +16,7 @@ class Mark < ApplicationRecord
   belongs_to :mark_type
   belongs_to :photo
   belongs_to :user
-  validates :mark_type_id, :photo_id, :user_id,
-            :mark, :content, presence: true
+  validates :mark_type_id, :photo_id, :user_id, presence: true
   #accepts_nested_attributes_for :mark_type
   #accepts_nested_attributes_for :photo
   #accepts_nested_attributes_for :user
@@ -28,15 +27,39 @@ class Mark < ApplicationRecord
   has_attached_file                 :image2
   validates_attachment_content_type :image2, content_type: /\Aimage\/.*\Z/
 
+
   rails_admin do
     navigation_label 'Оценки'
     edit do
-      field :mark_type
-      field :photo
-      field :mark
-      field :content
-      field :image1
-      field :image2
+      field :mark_type do
+        read_only true
+      end
+      field :photo do
+        read_only true
+        pretty_value do
+          "<a href='#{value.photo.url}' target='_blank'><img style='max-height: 150px' src='#{value.photo.url}'/></a>".html_safe
+        end
+      end
+      field :mark do
+        visible do
+          bindings[:object].mark_type.name != 'Комментарий'
+        end
+      end
+      field :content do
+        visible do
+          bindings[:object].mark_type.name == 'Комментарий'
+        end
+      end
+      field :image1 do
+        visible do
+          bindings[:object].mark_type.name == 'Комментарий'
+        end
+      end
+      field :image2 do
+        visible do
+          bindings[:object].mark_type.name == 'Комментарий'
+        end
+      end
     end
   end
 
