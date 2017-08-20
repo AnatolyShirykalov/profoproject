@@ -7,8 +7,8 @@ ru:
         many: фотографии
         other: фотографии
       stage: тур
-      tournament: конкурс
-      tournament_user: участники конкурса
+      tournament: сезон
+      tournament_user: участники сезона
       mark_type: система оценок
       mark: оценка
     attributes:

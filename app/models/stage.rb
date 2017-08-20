@@ -103,8 +103,8 @@ class Stage < ApplicationRecord
     memorize
     puts "memorized!"
     @rts = @mem_marks.group_by(&:photo_id).map(&results_by_photo).map do |ph|
-      jt = ph[:marks][:juries].map(&:mark).sum
-      vt = results_total(ph[:marks][:viewers])
+      jt = ((ph[:marks][:juries]) || []).map(&:mark).sum
+      vt = results_total((ph[:marks][:viewers]) || [])
       ph.merge total: jt + vt
     end.map do |ph|
       ph.merge results_by_type(ph)
@@ -164,7 +164,7 @@ class Stage < ApplicationRecord
     %i[juries viewers].each do |r|
       by_type[r] = begin
         ret = {}
-        ph[:marks][r].group_by(&:mark_type_id).each do |mid, ms|
+        (ph[:marks][r] || []).group_by(&:mark_type_id).each do |mid, ms|
           mt_name = @mem_mark_types.find{|mt| mt.id == mid}.name
           ret[mt_name] = results_total(ms, r)
         end
@@ -175,7 +175,7 @@ class Stage < ApplicationRecord
   end
 
   def results_by_user ph
-    {by_user: ph[:marks][:juries].group_by(&:user_id).map do |uid, ms|
+    {by_user: (ph[:marks][:juries] || []).group_by(&:user_id).map do |uid, ms|
       {
         user: @mem_juries.find {|u| u.id == uid},
         marks: ms.group_by(&:mark_type_id).map do |mt_id, ms_t|
