@@ -114,7 +114,7 @@ class Stage < ApplicationRecord
   end
 
   def to_rows
-    results.sort{|r| -r[:total]}.map.with_index do |result, i|
+    results.sort_by{|r| -r[:total]}.map.with_index do |result, i|
       a = [i + 1, result[:user].name, result[:total]] +
       @mem_mark_types.map do |mark_type|
         %i[juries viewers].map {|role| result[role][mark_type.name]}
@@ -156,6 +156,7 @@ class Stage < ApplicationRecord
   def results_total ms, r = 'juries'
     t = ms.map(&:mark).sum
     return t if r.to_s == 'juries'
+    return 0 if ms.size == 0
     (t.to_f / ms.size.to_f).round
   end
 
