@@ -19,7 +19,4 @@
           .row: .col-sm-12.text-center
             = link_to photo.photo.url, target: '_blank' do
               = image_tag photo.photo, class: 'img-fluid aesh-height'
-          - if @stage.has_all_marks?
-            .row: .col-sm-12 = photo.user.name
-          - else
             = render 'marks/under_photo', photo: photo
