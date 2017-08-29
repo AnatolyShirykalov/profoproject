@@ -15,6 +15,7 @@ export default class Mark {
         data: $f.serialize(),
         success: (r) => {
           $f.closest('.under_photo').replaceWith(r)
+          this.initCreate()
         },
         error: (er)=>{
           console.error(er)
