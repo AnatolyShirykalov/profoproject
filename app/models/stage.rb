@@ -115,7 +115,7 @@ class Stage < ApplicationRecord
 
   def to_rows
     results.sort_by{|r| -r[:total]}.map.with_index do |result, i|
-      a = [i + 1, result[:user].name, result[:total]] +
+      a = [i + 1, result[:user].name, result[:photo].name, result[:total]] +
       @mem_mark_types.map do |mark_type|
         %i[juries viewers].map {|role| result[role][mark_type.name]}
       end.inject(:+)
@@ -132,7 +132,7 @@ class Stage < ApplicationRecord
   end
 
   def row_header
-    %w[# Участник Всего] + mark_types.map do |mark_type|
+    %w[# Участник Название Всего] + mark_types.map do |mark_type|
       ['жюри', 'совет зрителей'].map {|name| "#{mark_type.name} (#{name})"}
     end.inject(:+)
   end
