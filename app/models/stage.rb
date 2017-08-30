@@ -137,6 +137,14 @@ class Stage < ApplicationRecord
     end.inject(:+)
   end
 
+  def jury_stats
+    total = mark_types.count * photos.count
+    tournament.juries.map do |jury|
+      marks_count = marks.where(user: jury).count
+      {name: jury.name, count: marks_count, rest: total - marks_count}
+    end
+  end
+
   private
   def results_by_photo
     Proc.new do |pid, ms|
