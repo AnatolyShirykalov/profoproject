@@ -1,7 +1,16 @@
+import copy from 'copy-text-to-clipboard'
 export default class Result {
   constructor() {
     this.initPostResults()
     this.initPostMarks()
+    this.initVkComment()
+  }
+
+  initVkComment(){
+    $('.copy-comment').off('click').click((e) => {
+      let hid = $(e.currentTarget).closest('.card').find('.hidden')
+      copy(hid[0].innerHTML)
+    })
   }
 
   initPostMarks(){
