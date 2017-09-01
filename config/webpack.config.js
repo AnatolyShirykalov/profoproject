@@ -108,10 +108,6 @@ var config = {
 if (production) {
   config.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-[chunkhash].js'}),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: { warnings: false },
-      sourceMap: false
-    }),
     new webpack.DefinePlugin({ // <--key to reduce React's size
       'process.env': { NODE_ENV: JSON.stringify('production') }
     }),
