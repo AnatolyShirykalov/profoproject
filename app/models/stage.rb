@@ -161,7 +161,7 @@ class Stage < ApplicationRecord
     end
   end
 
-  def results_total ms, r = 'juries'
+  def results_total ms, r = 'viewers'
     t = ms.map(&:mark).sum
     return t if r.to_s == 'juries'
     return 0 if ms.size == 0
