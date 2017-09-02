@@ -9,7 +9,9 @@
   .card: .card-block
     .hidden-block style='height: 0; overflow: hidden'
       .hidden = raw vk_comment result
+      .sz-hidden = raw vk_comment_sz result
     .row: .col-sm-12.text-center: button.btn.btn-success.copy-comment Копировать оценки и комментарий
+    .row: .col-sm-12.text-center: button.btn.btn-success.copy-sz Копировать оценки совета зрителей
     .row: .col-sm-12.text-center: h2 = "Фотограф: #{result[:user].name}"
     .row: .col-sm-12.text-center
       = image_tag result[:photo].photo, class: 'img-fluid aesh-height'

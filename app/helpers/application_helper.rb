@@ -10,14 +10,24 @@ module ApplicationHelper
   end
 
   def vk_comment result
-    result[:by_user].map do |rt|
+    (result[:by_user].map do |rt|
       msg = "#{rt[:user].name}:\n"
-      cmt = ''
+      cmt = []
       rt[:marks].each do |mark|
         msg += "#{mark[:type].name}: #{mark[:mark].mark}\n" if mark[:type].name != 'Комментарий'
-        cmt += mark[:mark].content
+        cmt.push mark[:mark].content unless mark[:mark].content.blank?
+        cmt.push asset_url(mark[:mark].image1.url) unless mark[:mark].image1.path.nil?
+        cmt.push asset_url(mark[:mark].image2.url) unless mark[:mark].image2.path.nil?
       end
-      "#{msg}\n#{cmt}"
-    end.join("\n_______________\n")
+      "#{msg}\n#{cmt.join("\n")}"
+    end + begin
+      [ vk_comment_sz(result) ]
+    end).join("\n_______________\n")
+  end
+
+  def vk_comment_sz result
+    "Совет зрителей\n" + result[:viewers].map do |mt, m|
+      "#{mt}: #{m}"
+    end.join("\n")
   end
 end

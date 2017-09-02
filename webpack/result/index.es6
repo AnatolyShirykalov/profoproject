@@ -11,6 +11,10 @@ export default class Result {
       let hid = $(e.currentTarget).closest('.card').find('.hidden')
       copy(hid[0].innerHTML)
     })
+    $('.copy-sz').off('click').click((e) => {
+      let hid = $(e.currentTarget).closest('.card').find('.sz-hidden')
+      copy(hid[0].innerHTML)
+    })
   }
 
   initPostMarks(){
