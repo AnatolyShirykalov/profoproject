@@ -18,6 +18,7 @@ class StagesController < ApplicationController
 
   def results
     @stage = Stage.find_by slug: params[:slug]
+    @jps = JPS.new @stage
   end
 
   def post

@@ -1,9 +1,18 @@
+import './index.sass'
 import copy from 'copy-text-to-clipboard'
 export default class Result {
   constructor() {
     this.initPostResults()
     this.initPostMarks()
     this.initVkComment()
+    this.initRemoveColumn()
+  }
+
+  initRemoveColumn(){
+    $('.rem-col').click((e)=>{
+      let $n = $(e.currentTarget).parent().index()
+      $('#jps tr').find(`td:eq(${$n}),th:eq(${$n})`).remove()
+    })
   }
 
   initVkComment(){

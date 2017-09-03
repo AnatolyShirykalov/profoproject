@@ -145,6 +145,10 @@ class Stage < ApplicationRecord
     end
   end
 
+  def numed_mark_types
+    mark_types.where.not(name: 'Комментарий')
+  end
+
   private
   def results_by_photo
     Proc.new do |pid, ms|
