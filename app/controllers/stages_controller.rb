@@ -9,6 +9,8 @@ class StagesController < ApplicationController
   def show
     @stage = Stage.preload(:tournament).find_by slug: params[:slug]
     @owe = @stage.tournament.photographs.find_by(id: current_user.id)
+    @photos = @stage.photos.unmarked_by(current_user, @stage)
+    @photos = @stage.photos if params[:all]
     @photo =  @stage.photos.find_or_initialize_by({
       user: current_user,
       enabled: true,

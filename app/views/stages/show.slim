@@ -11,9 +11,15 @@
 - elsif @stage.markable? current_user
   - if @stage.photos.count == 0
     .row: .col-sm-12.text-center Фото к этому туру ещё не загружены
+  - elsif @photos.count == 0
+    .row: .col-sm-12.text-center Нет недооценнённых
+    .row: .col-sm-12.text-center
+      = link_to 'Смотреть все Фото', {all: true}
   - else
-    .row: .col-sm-12.text-center Комментарии можно редактировать в админке в расширенном текстовом редакторе с возможностью встраивания изображений, видео, и прочих плюшек. Прямая ссылка на редактирование конкретного комментария появляется сразу после успешного создания комментария.
-    - @stage.photos.to_a.shuffle.each do |photo|
+    .row: .col-sm-12.text-center По умолчанию показаны только те фото, которые Вам осталось оценить
+    .row: .col-sm-12.text-center
+      = link_to 'Смотреть все Фото', {all: true}
+    - @photos.to_a.shuffle.each do |photo|
       - if photo.persisted?
         .card
           .row: .col-sm-12.text-center

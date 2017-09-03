@@ -48,6 +48,14 @@ class Photo < ApplicationRecord
     %i[juries viewers].map{|r| total_mark_by r}.sum
   end
 
+  def has_all_marks? user
+    stage.mark_types.count == marks.where(user: user).count
+  end
+
+  scope :unmarked_by, lambda { |user, stage|
+    where("(SELECT COUNT(*) FROM marks WHERE marks.user_id = ? AND marks.photo_id = photos.id) < ?", user.id, stage.mark_types.count)
+  }
+
   rails_admin do
     navigation_label 'Фотографии'
     field :name
