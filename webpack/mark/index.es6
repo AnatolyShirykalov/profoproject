@@ -14,7 +14,7 @@ export default class Mark {
         method: 'POST',
         data: $f.serialize(),
         success: (r) => {
-          $f.closest('.under_photo').replaceWith(r)
+          $f.closest('.new-mark-container').replaceWith(r)
           this.initCreate()
         },
         error: (er)=>{
@@ -22,7 +22,6 @@ export default class Mark {
           $('button', $f).removeAttr('disabled')
         },
       })
-      console.log('submit')
     })
   }
 }

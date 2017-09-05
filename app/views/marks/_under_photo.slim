@@ -2,29 +2,10 @@
   .row.under_photo: .col-sm-12.text-center
     - @stage.mark_types.each do |mark_type|
       .card: .row
-        - mark =  photo.marks.find_or_initialize_by(user: current_user, mark_type: mark_type)
+        - mark = photo.marks.find_or_initialize_by user: current_user,\
+          mark_type: mark_type
         - if mark.persisted?
-          .col-sm = mark_type.name
-          - if mark_type.name != 'Комментарий'
-            .col-sm = mark.mark
-          - else
-            .col-sm = raw mark.content
-          .col-sm
-            =link_to 'Редактировать в админке', \
-            rails_admin.edit_path('mark', mark.id),\
-            data: no_turbolinks
+          = render mark, mark_type: mark_type
         - else
-          .col-sm-12.text-center = simple_form_for mark, defaults: {\
-            input_html: {class: 'form-control'},\
-            wrapper_html: {class: 'col-sm'}},\
-            html: {class: 'form-inline'} do |f|
-              - if mark_type.name != 'Комментарий'
-                = f.input :mark, required: true, label: mark_type.name, input_html: {min: 1, max: 5, step: 1}
-              - else
-                - next if @stage.tournament.viewers.pluck(:id).include? current_user.id
-                = f.input :content, required: true, label: 'Комментарий'
-                = f.input :image1, label: 'Картинка 1'
-                = f.input :image2, label: 'Картинка 2'
-              - %i[user_id mark_type_id photo_id].each do |key|
-                = f.hidden_field key
-              = f.button :submit, class: 'btn btn-success'
+          = render 'marks/new', mark: mark, mark_type: mark_type
+

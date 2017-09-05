@@ -5,9 +5,11 @@ class Ability
     return if user.nil?
     admin_ui
     can :read, [Photo, Stage, MarkType]
-    can :manage, Mark, user: user
+    can :read,   Mark, user_id:  user.id
+    can :manage, Mark, user_id:  user.id,
+                       photo_id: Stage.current.photos.pluck(:id)
     return if user.role != 'admin'
-    can :read, :all
+    can :read,  :all
     can :manage,:all
     cannot :manage, Mark
   end

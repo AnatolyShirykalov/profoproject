@@ -1,0 +1,10 @@
+.col-sm = mark_type.name
+- if mark_type.name != 'Комментарий'
+  .col-sm = mark.mark
+- else
+  .col-sm = mark.content
+.col-sm
+  = link_to 'Редактировать в админке', \
+  rails_admin.edit_path('mark', mark.id),\
+  data: no_turbolinks
+
