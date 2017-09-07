@@ -30,7 +30,4 @@
     .row: .col-sm-12.text-center: h3 Совет зрителей
     - result[:viewers].each do |mark_type_name, markmark|
       - if mark_type_name != 'Комментарий'
-        .row
-          .col-sm = mark_type_name
-          .col-sm = markmark
-
+        .col-sm-12.text-center = mark_type_name + ' - ' + markmark.to_s

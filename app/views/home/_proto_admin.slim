@@ -1,5 +1,5 @@
 - if @stages.count > 0
-  .row: .col-sm-12.text-center: h1 Закрытые туры
+  .row: .col-sm-12.text-center: h1 style="background-color: #d4d9f7;" Закрытые туры
   - @stages.each do |stage|
     .row: .col-sm-12.text-center
       = link_to "Результаты тура «#{stage.name}» (дэдлайн #{stage.deadline})", stage_results_path(slug: stage.slug)
@@ -8,15 +8,15 @@
   .row: .col-sm-12.text-center: h1 = "Открыт тур «#{@stage.name}»"
   - unless @stage.all_photos_loaded?
     .row: .col-sm-12.text-center = 'Загружены не все фото'
-  - @stage.jury_stats.each do |stat|
-    .row
-      .col = stat[:name]
-      .col = "Количество оценок: #{stat[:count]}"
-      .col = "Осталось поставить: #{stat[:rest]}"
+  .mark_users 
+    - @stage.jury_stats.each do |stat|
+      .row
+        .col = stat[:name]
+        .col = "Количество оценок: #{stat[:count]}"
+        .col = "Осталось поставить: #{stat[:rest]}"
   .row: .col-sm-12.text-center = "Дедлайн: #{@stage.deadline}"
   - unless @stage.all_photos_loaded?
     .row: .col-sm-12.text-center
       = link_to 'Загрузить фото', new_photo_path(stage: @stage.slug)
     .row: .col-sm-12.text-center
       = link_to 'Загрузить альбом VK', albums_path
-

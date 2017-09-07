@@ -8,6 +8,7 @@ class StagesController < ApplicationController
 
   def show
     @stage = Stage.preload(:tournament).find_by slug: params[:slug]
+    return render_error(404) if @stage.nil?
     @owe = @stage.tournament.photographs.find_by(id: current_user.id)
     @photos = @stage.photos.unmarked_by(current_user, @stage)
     @photos = @stage.photos if params[:all]
