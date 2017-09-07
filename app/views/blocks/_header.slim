@@ -1,8 +1,13 @@
-header: .row
-  .col-sm = render_navigation &navigation(:main)
-  .col-sm
-    - if user_signed_in?
-      .row: .col-sm = link_to 'Выйти', destroy_user_session_path, data: {method: 'delete'}
-      .row: .col-sm = link_to 'Админка', '/admin', data: no_turbolinks
-    - else
-      = link_to 'Войти', new_user_session_path
+nav.container.navbar.navbar-toggleable-md style="background-color: #652540;"
+  .collapse.navbar-collapse
+   ul.navbar-nav
+    - Page.all.each do |page|
+      li.nav-item = link_to page.name, page.fullpath, :class => 'nav-link'
+        / li = link_to '#', 'cnhf'
+/ = render_navigation &navigation(:main)
+    .col-sm
+      - if user_signed_in?
+        .row: .col-sm = link_to 'Выйти', destroy_user_session_path, data: {method: 'delete'}
+        .row: .col-sm = link_to 'Админка', '/admin', data: no_turbolinks
+      - else
+        = link_to 'Войти', new_user_session_path
