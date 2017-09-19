@@ -1,5 +1,5 @@
 import './index.sass'
-import copy from 'copy-text-to-clipboard'
+import copy from 'copy'
 export default class Result {
   constructor() {
     this.initPostResults()
