@@ -16,17 +16,18 @@ table.table-bordered.table.table-hover.table-responsive#jps
       th Место
       th Имя
       th Название
-      th Всего баллов
-      th Всего баллов за этот тур
+      - all_th = @jps.stages.map(&:sort).map{|s| "10.#{s}"}.join("+")
+      th = "Всего #{all_th}"
+      th Всего этот тур
       - %w[Жюри СЗ].each do |key|
         - @stage.numed_mark_types.each do |mark_type|
-          th = "#{mark_type.name} #{key} всего"
+          th = "#{mark_type.name} #{key} #{all_th}"
       - %w[Жюри СЗ].each do |key|
         - @stage.numed_mark_types.each do |mark_type|
           th = "#{mark_type.name} #{key} этот тур"
     tr
       - (0..(@stage.numed_mark_types.count * 4) + 4).each do |i|
-        td: button.rem-col style="background-image: url('#{asset_path('close.png')}')"
+        td: button.rem-col style="background-image: url('#{asset_path('close.png')}')" title="Удалить колонку"
 
   tbody
     - @jps.sorted_photographs.each_with_index do |photograph, i|

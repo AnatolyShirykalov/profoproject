@@ -7,7 +7,7 @@ class JPS
     @photographs = tournament.photographs.preload(:photos).to_a
     @enabled_photographs = tournament.enabled_photographs.preload(:photos).to_a
     @stages = tournament.stages.preload(:mark_types).enabled.
-                                where('deadline <= ?', stage.deadline)
+      where('deadline <= ?', stage.deadline).order(deadline: :desc).limit(2)
     @photos = @photographs.map(&:photos).inject(:+).
                           select{|photo| photo.stage_id.in? @stages.map(&:id)}
     @marks = Mark.where(user: @juries + @viewers, photo: @photos).to_a
