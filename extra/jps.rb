@@ -1,6 +1,7 @@
 class JPS
   attr_accessor :juries, :viewers, :photographs, :stages, :photos, :marks, :mark_types
   def initialize(stage)
+    @stage = stage
     tournament = stage.tournament
     @juries = tournament.juries.to_a
     @viewers = tournament.viewers.to_a
@@ -33,22 +34,24 @@ class JPS
     es.first
   end
 
-  def sorted_photographs
-    @enabled_photographs.sort_by { |photograph| - score(photograph) }
+  def sorted_photographs *args
+    @enabled_photographs.sort_by { |photograph| - score(photograph, *args) }
   end
 
   def score photograph, *args
     jury_sum = elems(photograph, :jury, *args).map(&:mark).sum
     va = 0
     @stages.each do |stage|
-      ve = elems(photograph, :viewer, stage, *args).map(&:mark)
-      va += (ve.sum.to_f / ve.size).round if ve.size > 0
+      @mark_types.each do |mark_type|
+        ve  = elems(photograph, mark_type, :viewer, stage, *args).map(&:mark)
+        va += (ve.sum.to_f / ve.size).round if ve.size > 0
+      end
     end
     jury_sum + va
   end
 
   def photo photograph
-    @photos.find{|photo| photo.user_id == photograph.id}
+    @photos.find{|photo| photo.user_id == photograph.id && photo.stage_id == @stage.id}
   end
 
   private
