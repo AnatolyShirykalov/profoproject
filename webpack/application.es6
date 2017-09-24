@@ -29,4 +29,3 @@ document.addEventListener("turbolinks:load", function() {
       new Result(); break;
   }
 })
-
