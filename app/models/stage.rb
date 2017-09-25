@@ -101,7 +101,7 @@ class Stage < ApplicationRecord
   def results
     return @rts if @rts
     memorize
-    puts "memorized!"
+    # puts "memorized!"
     @rts = @mem_marks.group_by(&:photo_id).map(&results_by_photo).map do |ph|
       jt = ((ph[:marks][:juries]) || []).map(&:mark).sum
       vt = results_total((ph[:marks][:viewers]) || [])

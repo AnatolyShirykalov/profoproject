@@ -1,5 +1,5 @@
 nav.main-nav.container.navbar.navbar-toggleable-md style="background-color: #652540"
-  ul.nav.navbar-nav
+  ul.nav.navbar-nav-left
     - Page.all.each do |page|
       li = link_to page.name, page.fullpath, :class => 'nav-link'
   ul.nav.navbar-nav-right
