@@ -1,8 +1,10 @@
-header: .row
-  .col-sm = render_navigation &navigation(:main)
-  .col-sm
+nav.main-nav.container.navbar.navbar-toggleable-md style="background-color: #652540"
+  ul.nav.navbar-nav-left
+    - Page.all.each do |page|
+      li = link_to page.name, page.fullpath, :class => 'nav-link'
+  ul.nav.navbar-nav-right
     - if user_signed_in?
-      .row: .col-sm = link_to 'Выйти', destroy_user_session_path, data: {method: 'delete'}
-      .row: .col-sm = link_to 'Админка', '/admin', data: no_turbolinks
+      li = link_to 'Выйти', destroy_user_session_path, data: {method: 'delete'}, :class => 'nav-link'
+      li = link_to 'Админка', '/admin', data: no_turbolinks, :class => 'nav-link'
     - else
-      = link_to 'Войти', new_user_session_path
+      li = link_to 'Войти', new_user_session_path, :class => 'nav-link'
