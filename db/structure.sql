@@ -396,7 +396,15 @@ CREATE TABLE photos (
     enabled boolean DEFAULT false NOT NULL,
     sort integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    photo1_file_name character varying,
+    photo1_content_type character varying,
+    photo1_file_size integer,
+    photo1_updated_at timestamp without time zone,
+    photo2_file_name character varying,
+    photo2_content_type character varying,
+    photo2_file_size integer,
+    photo2_updated_at timestamp without time zone
 );
 
 
@@ -1383,6 +1391,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170806112363'),
 ('20170806112364'),
 ('20170806112365'),
-('20170806112366');
+('20170806112366'),
+('20171015192155');
 
 

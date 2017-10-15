@@ -32,7 +32,7 @@ class PhotosController < ApplicationController
 
   private
   def photo_fields
-    %i[user_id stage_id target enabled name description photo]
+    %i[user_id stage_id target enabled name description photo photo1 photo2]
   end
 
   def redices_photo_params

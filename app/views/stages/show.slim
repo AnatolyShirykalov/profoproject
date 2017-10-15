@@ -25,4 +25,10 @@
           .row: .col-sm-12.text-center
             = link_to photo.photo.url, target: '_blank' do
               = image_tag photo.photo, class: 'img-fluid aesh-height'
+            - unless photo.photo1.path.nil?
+              = link_to photo.photo1.url, target: '_blank' do
+                = image_tag photo.photo1, class: 'img-fluid aesh-height'
+            - unless photo.photo2.path.nil?
+              = link_to photo.photo2.url, target: '_blank' do
+                = image_tag photo.photo2, class: 'img-fluid aesh-height'
             = render 'marks/under_photo', photo: photo

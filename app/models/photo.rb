@@ -34,6 +34,10 @@ class Photo < ApplicationRecord
 
   has_attached_file                 :photo
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+  has_attached_file                 :photo1
+  validates_attachment_content_type :photo1, content_type: /\Aimage\/.*\Z/
+  has_attached_file                 :photo2
+  validates_attachment_content_type :photo2, content_type: /\Aimage\/.*\Z/
 
   enumerize :target, in: %w[stage backstage]
 
@@ -60,6 +64,8 @@ class Photo < ApplicationRecord
     navigation_label 'Фотографии'
     field :name
     field :photo
+    field :photo1
+    field :photo2
     field :stage
     field :target
     field :marks

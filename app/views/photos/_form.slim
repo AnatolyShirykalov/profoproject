@@ -9,6 +9,8 @@
       = f.hidden_field :src
     - else
       = f.input :photo, required: true
+      = f.input :photo1, required: false
+      = f.input :photo2, required: false
     = f.input :user_id, collection: @stage.photo_debtors, required: true
     = f.input :name, required: true
     = f.button :submit, class: 'btn btn-success'
