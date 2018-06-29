@@ -3,15 +3,15 @@ source 'https://rubygems.org'
 gem 'rails', '5.1.1'
 gem 'pg'
 
-gem 'sass'
+gem 'sass', '>= 3.5.1'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.19.8'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
 gem 'haml'
 
-gem 'sass-rails'
+gem 'sass-rails', '>= 5.0.6'
 gem 'webpack-rails'
 
 gem 'devise'
@@ -39,7 +39,7 @@ group :development do
   gem 'annotate'
   gem 'binding_of_caller'
   gem 'pry-rails'
-  gem 'listen'
+  gem 'listen', '>= 3.1.5'
 
 
   gem 'capistrano', require: false
