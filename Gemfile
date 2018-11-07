@@ -5,28 +5,28 @@ gem 'pg'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.19.8'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
 gem 'haml'
 
-gem 'sass-rails'
-gem 'webpack-rails'
+gem 'sass-rails', '>= 5.0.6'
+gem 'webpack-rails', '>= 0.9.10'
 
-gem 'devise'
+gem 'devise', '>= 4.3.0'
 gem 'devise-i18n'
 gem 'cancancan', '~> 1.17.0'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
-gem 'vkontakte_api'
+gem 'omniauth', '>= 1.6.1'
+gem 'omniauth-facebook', '>= 4.0.0'
+gem 'omniauth-vkontakte', '>= 1.4.0'
+gem 'vkontakte_api', '>= 1.4.4'
 
 
 gem 'cloner'
 gem 'puma', '3.8.2'
 
-gem 'x-real-ip'
+gem 'x-real-ip', '>= 0.2.1'
 gem 'sentry-raven'
 
 gem 'rs_russian'
@@ -50,10 +50,10 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.6.0'
   gem 'database_cleaner'
   gem 'email_spec'
 
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '>= 4.8.0'
 end
 
