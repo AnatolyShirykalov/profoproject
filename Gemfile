@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.1'
+gem 'rails', '5.1.6.1'
 gem 'pg'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.19.8'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
