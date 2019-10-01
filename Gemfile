@@ -5,7 +5,7 @@ gem 'pg'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.19.8'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
