@@ -24,7 +24,7 @@ gem 'vkontakte_api'
 
 
 gem 'cloner'
-gem 'puma', '3.8.2'
+gem 'puma', '3.12.3'
 
 gem 'x-real-ip'
 gem 'sentry-raven'
