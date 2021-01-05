@@ -6,7 +6,7 @@
   "repository": "git@rscz.ru:rocket-science/profoproject.git",
   "dependencies": {
     "autoprefixer": "^7.1.1",
-    "axios": "^0.16.1",
+    "axios": "^0.21.1",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^7.0.0",
